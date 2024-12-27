@@ -197,7 +197,7 @@ button:hover {
      color:white;
   }
   header {
-    background-color: #000f03; /* Dark background for contrast */
+   /* background-color: #000f03;  Dark background for contrast */
     color: #fff; /* Light text for readability */
     padding: 15px 20px; /* Space around header content */
     display: flex; /* Flexbox for alignment */
