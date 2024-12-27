@@ -1,3 +1,69 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #06C167;
+}
+
+form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+label {
+  font-size: 16px;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+input:focus, select:focus {
+  border-color: #06C167;
+  outline: none;
+  box-shadow: 0 0 5px rgba(6, 193, 103, 0.5);
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #06C167;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #048F4D;
+}
+
+
+
 .my-name{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color:#DC5F00;
@@ -130,74 +196,62 @@
      border-width: 0px;
      color:white;
   }
+  header {
+    background-color: #000f03; /* Dark background for contrast */
+    color: #fff; /* Light text for readability */
+    padding: 15px 20px; /* Space around header content */
+    display: flex; /* Flexbox for alignment */
+    justify-content: space-between; /* Space between brand and navigation */
+    align-items: center; /* Vertically align items */
+    border-bottom: 2px solid #DC5F00; /* Accent line for style */
+  }
+  
+  header a {
+    text-decoration: none; /* Remove underlines from links */
+    color: #fff; /* White text for contrast */
+    font-size: 16px; /* Adjust font size for readability */
+    margin: 0 10px; /* Space between links */
+  }
+  
+  header a:hover {
+    color: #06C167; /* Green hover effect for links */
+  }
+  
+  header .brand {
+    display: flex; /* Flexbox for aligning logo and title */
+    align-items: center; /* Align logo and title vertically */
+  }
+  
+  header .brand img {
+    width: 150px; /* Adjust logo size */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Space between logo and title */
+  }
+  
+  header .brand span {
+    font-family: 'Lilita One', cursive; /* Brand font */
+    font-size: 24px; /* Adjust font size */
+    color: #DC5F00; /* Brand color */
+  }
+  
+  .nav {
+    display: flex; /* Flexbox for navigation links */
+    list-style: none; /* Remove bullet points */
+    margin: 0; /* Reset margin */
+    padding: 0; /* Reset padding */
+  }
+  
+  .nav-item {
+    margin: 0 10px; /* Space between navigation items */
+  }
+  
+  .nav-pills .nav-link.active {
+    background-color: #06C167; /* Active link background */
+    color: #fff; /* Active link text color */
+  }
   
   
-  
-  
-  
-  
-  
-  
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-h1 {
-    margin-bottom: 20px;
-    font-size: 28px;
-    color: #06C167;
-}
-
-form {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-}
-
-label {
-    font-size: 16px;
-    color: #333;
-    display: block;
-    margin-bottom: 5px;
-}
-
-input, select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-input:focus, select:focus {
-    border-color: #06C167;
-    outline: none;
-    box-shadow: 0 0 5px rgba(6, 193, 103, 0.5);
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #06C167;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #048F4D;
-}
+  header{
+    margin-top:280px;
+    width:100%;
+  }
