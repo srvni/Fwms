@@ -1,0 +1,176 @@
+.my-name{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color:#DC5F00;
+}
+#pic-back{
+  text-align: left;
+  justify-content: left;
+  width:800px;
+  border-style: ridge;
+  
+  border-width: 2px;
+}
+.card-title1{
+     color:black;
+     font-weight: bolder;
+}
+.card-body1{
+  background-color: #EEEEEE;
+  text-align:center;
+}
+.my-intro{
+
+  
+    text-align:start;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+#my-pic{
+  background-color: #d1d3d8;
+  color: #373A40;
+  border-width:2px;
+  border-style: ridge;
+  border-color:black;
+}
+
+.join{
+  font-family:cursive;
+  color:darkslateblue;
+}
+
+#helping-bridge{
+    
+ 
+font-family:lilita one;
+
+   font-weight: bolder;
+    color:#DC5F00;
+   
+  
+    text-align: center;
+}
+
+.donate{
+    text-align: center;
+    color:rgb(133, 245, 248);
+    font-family:lilita one;
+    background-color: rgb(9, 76, 96);
+}
+
+.card-body{
+    background-color:rgb(9, 76, 96);
+   
+  }
+ 
+.card-title{
+   background-color:#eae4e0;
+  color:white;
+}
+.card-text{
+  color:white;
+}
+.container-fluid{
+  background-color:EEEEEE;
+}
+img{
+  padding-left:40px;
+  padding-right: 40px;
+}
+
+
+.loginbasic{
+  height:300px;
+  width:400px;
+margin-left:30%;
+  margin-top:8%;
+  position:fixed;
+
+  color:white;
+  
+  text-align: center;
+  
+}
+.loginback{ 
+ 
+  text-align:center;
+    float: inherit;
+   font-size: 20px;
+   width: 500px;
+  
+}
+
+
+.loginbackback{
+  border-width: 0px;
+  color:white;
+}
+
+
+
+
+.signupbasic{
+  height:400px;
+  width:500px;
+margin-left:30%;
+  margin-top:8%;
+  position:fixed;
+
+
+  color:white;
+  text-align: center;
+
+}
+
+.signupback{
+ 
+  text-align:center;
+    float: inherit;
+   font-size: 20px;
+   width: 500px;
+  
+}
+.signupbackback{
+   border-width: 0px;
+   color:white;
+}
+button{
+   border-radius:10px ;
+   border:1px solid blue;
+   font:blue;
+   padding:3px;
+}
+.card-img-top {
+  display: flex;
+  margin: 0 auto; /* Centers the image horizontally */
+  max-height: 350px; /* Ensures the height does not exceed the given size */
+  width: auto; /* Maintains aspect ratio */
+}
+
+/* Styling the card titles */
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center; /* Centers the text */
+}
+
+/* Optional: Add padding and margin to the cards for a cleaner look */
+.card {
+  margin: 50px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visuals */
+  padding-right:50px;
+  padding-left: 80px;
+}
+
+/* Adjusting container layout */
+.container {
+  margin-top: 40px;
+}
+
+/*Optional: Styling the row and columns for*/
+.row-cols-1 .col {
+  margin-bottom: 15px;
+}
+.card:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}

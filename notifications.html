@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link rel="stylesheet" href="notifications.css">
+</head>
+<body>
+    <h1>Notifications</h1>
+    <div id="notificationsContainer"></div>
+
+    <script>
+        const notificationsContainer = document.getElementById('notificationsContainer');
+
+        // Retrieve notifications from localStorage
+        const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+
+        // Display notifications
+        notifications.forEach(notification => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML = `
+                <h2>Notification for ${notification.orphanage.orgName}</h2>
+                <p><strong>Food Details:</strong> ${notification.donorInfo.foodDetails}</p>
+                <p><strong>Donor Location:</strong> ${notification.donorInfo.donorLocation}</p>
+                <p><strong>Transport:</strong> ${notification.transport}</p>
+                <p><strong>Status:</strong> ${notification.status}</p>
+            `;
+            notificationsContainer.appendChild(card);
+        });
+    </script>
+</body>
+</html>
