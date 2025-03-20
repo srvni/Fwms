@@ -53,17 +53,15 @@
     <h2 class="oo">FEEDBACK:</h2>
     <textarea id="feedback" rows="14" cols="50" class="o" placeholder="PLEASE SHARE YOUR EXPERIENCE WITH US..."></textarea>
     <button class="ooo" onclick="submitFeedback()"><h4><b>SUBMIT</b></h4></button>
-    <div id="successMessage">Your feedback has been submitted successfully!</div>
 
     <script>
         function submitFeedback() {
             var feedback = document.getElementById('feedback').value;
-            var successMessage = document.getElementById('successMessage');
             
             if (feedback.trim() !== "") {
                 localStorage.setItem('userFeedback', feedback);
-                successMessage.style.display = "block";
-                document.getElementById('feedback').value = "";
+                alert("Your feedback has been submitted successfully!");
+                window.close();
             } else {
                 alert("Please enter your feedback before submitting.");
             }
