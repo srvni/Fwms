@@ -33,6 +33,35 @@
   <h1>Donor Form</h1>
 
   <form id="donorForm">
+    
+        <label for="orgName">Name of the Organization:</label>
+        <input type="text" name="orgName" id="orgName" placeholder="Enter organization name" required><br><br>
+
+        <label for="location">Select Location:</label>
+        <select name="location" id="location" required>
+            <option value="" disabled selected>Select location</option>
+            <option value="Alipiri">Alipiri</option>
+            <option value="Kapila Theertham">Kapila Theertham</option>
+            <option value="Govindaraja Swamy Temple">Govindaraja Swamy Temple</option>
+            <option value="Sri Venkateswara Zoo">Sri Venkateswara Zoo</option>
+            <option value="Chandragiri Fort">Chandragiri Fort</option>
+            <option value="Tirumala">Tirumala</option>
+            <option value="SVIMS">SVIMS</option>
+            <option value="RTC Bus Stand">RTC Bus Stand</option>
+            <option value="Airport Road">Airport Road</option>
+            <option value="Renigunta">Renigunta</option>
+        </select><br><br>
+
+        <label for="peopleCount">Number of People:</label>
+        <input type="number" name="peopleCount" id="peopleCount" placeholder="Enter number of people" min="1" required><br><br>
+
+        <label for="contactNumber">Contact Number:</label>
+        <input type="tel" name="contactNumber" id="contactNumber" placeholder="Enter contact number" pattern="[0-9]{10}" required><br><br>
+
+        <label for="email">Email Address:</label>
+        <input type="email" name="email" id="email" placeholder="Enter email address" required><br><br>
+
+        <button type="submit">Submit</button>
     <button type="submit">Find Nearby Orphanages</button>
   </form>
 
