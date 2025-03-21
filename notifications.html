@@ -1,34 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notifications</title>
-    <link rel="stylesheet" href="notifications.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications</title>
+  <style>
+    /* Styling for the notification icon */
+    .notification-icon {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .unread-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background-color: red;
+      color: white;
+      font-size: 12px;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .notification-panel {
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      width: 300px;
+      background-color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      display: none;
+      z-index: 999;
+    }
+
+    .notification-panel h2 {
+      margin-top: 0;
+    }
+
+    .notification-panel ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .notification-panel li {
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 4px;
+    }
+
+    .notification-panel li.unread {
+      background-color: #e6f7ff;
+    }
+  </style>
 </head>
 <body>
-    <h1>Notifications</h1>
-    <div id="notificationsContainer"></div>
 
-    <script>
-        const notificationsContainer = document.getElementById('notificationsContainer');
+  <!-- Notification Icon to show number of unread notifications -->
+  <div id="notification-icon" class="notification-icon" onclick="toggleNotifications()">
+    <span id="unread-count" class="unread-count">0</span>
+    🛎️
+  </div>
 
-        // Retrieve notifications from localStorage
-        const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+  <!-- Notifications Panel -->
+  <div id="notification-panel" class="notification-panel">
+    <h2>Notifications</h2>
+    <ul id="notification-list"></ul>
+  </div>
 
-        // Display notifications
-        notifications.forEach(notification => {
-            const card = document.createElement('div');
-            card.classList.add('card');
-            card.innerHTML = `
-                <h2>Notification for ${notification.orphanage.orgName}</h2>
-                <p><strong>Food Details:</strong> ${notification.donorInfo.foodDetails}</p>
-                <p><strong>Donor Location:</strong> ${notification.donorInfo.donorLocation}</p>
-                <p><strong>Transport:</strong> ${notification.transport}</p>
-                <p><strong>Status:</strong> ${notification.status}</p>
-            `;
-            notificationsContainer.appendChild(card);
-        });
-    </script>
+  <script>
+    // Simulate notifications data
+    let notifications = [
+      { id: 1, message: "You received a donation.", type: 'donation', read: false },
+      { id: 2, message: "New feedback received: 'Great service!'", type: 'feedback', read: false },
+      { id: 3, message: "You received a donation.", type: 'donation', read: false },
+    ];
+
+    // Function to update the notification icon and list
+    function updateNotifications() {
+      const unreadCount = notifications.filter(notification => !notification.read).length;
+      document.getElementById('unread-count').innerText = unreadCount;
+      
+      const notificationList = document.getElementById('notification-list');
+      notificationList.innerHTML = ''; // Clear the current list
+
+      notifications.forEach(notification => {
+        const listItem = document.createElement('li');
+        listItem.innerText = notification.message;
+        if (!notification.read) {
+          listItem.classList.add('unread');
+        }
+        listItem.onclick = () => markAsRead(notification.id);
+        notificationList.appendChild(listItem);
+      });
+    }
+
+    // Function to mark a notification as read
+    function markAsRead(id) {
+      const notification = notifications.find(n => n.id === id);
+      if (notification) {
+        notification.read = true;
+        updateNotifications();
+      }
+    }
+
+    // Function to toggle the notification panel visibility
+    function toggleNotifications() {
+      const panel = document.getElementById('notification-panel');
+      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // Initial update of notifications when the page loads
+    document.addEventListener('DOMContentLoaded', updateNotifications);
+
+    // Example of how a new notification is added (e.g., when feedback or donation is received)
+    function addNotification(message, type) {
+      const newNotification = {
+        id: notifications.length + 1,
+        message,
+        type,
+        read: false
+      };
+      notifications.push(newNotification);
+      updateNotifications();
+    }
+
+    // Simulate receiving a new donation or feedback after a few seconds
+    setTimeout(() => {
+      addNotification('You received a new donation', 'donation');
+    }, 5000);
+
+    setTimeout(() => {
+      addNotification("New feedback: 'Amazing experience!'", 'feedback');
+    }, 10000);
+  </script>
+
 </body>
 </html>
