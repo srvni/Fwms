@@ -3,78 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orphanages</title>
+    <title>Orphanage Form</title>
+    <link rel="stylesheet" href="orphange.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-      <link href="style.css" rel="stylesheet"/></head>
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+QLD:wght@100..400&display=swap" rel="stylesheet">
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
-  
-    <link rel="stylesheet" href="orphanages.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-          <img src="OIP (1).jpg" class="bi me-2" width="240px" height="100px"/>
-          <span class="fs-4" id="helping-bridge">Food Donate</span>
-        </a>
-    
-        <ul class="nav nav-pills">
-          
-          <li class="nav-item"><a href="index.html" class="nav-link" aria-current="page">Home</a></li>
-          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-          <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
-          <li class="nav-item"><a href="signup.html" class="nav-link">Signup</a></li>
-          <li class="nav-item"><a href="orphanages.html" class="nav-link">Orphnages</a></li>
-          <li class="nav-item"><a href="receiver.html" class="nav-link">Orphanage Form</a></li>
-          <li class="nav-item"><a href="donor.html" class="nav-link">Donor form</a></li>
-          <li class="nav-item"><a href="notifications.html" class="nav-link">🔔</a></li>
-          <li class="nav-item"><a href="feedback.html" class="nav-link">Feedback</a></li>
-              </ul>
-      </header>
-        
-     
-    <h1>Orphanages</h1>
-    <div id="cardsContainer"></div>
+  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <img src="OIP (1).jpg" class="bi me-2" width="240px" height="100px">
+      <span class="fs-4" id="helping-bridge">Food Donate</span>
+    </a>
 
-    <script>
-        const container = document.getElementById('cardsContainer');
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a href="index.html" class="nav-link" aria-current="page">Home</a></li>
+      <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+      <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
+      <li class="nav-item"><a href="signup.html" class="nav-link">Signup</a></li>
+      <li class="nav-item"><a href="receiver.html" class="nav-link">Orphanage Form</a></li>
+      <li class="nav-item"><a href="donor.html" class="nav-link">Donor Form</a></li>
+      <li class="nav-item"><a href="notifications.html" class="nav-link">🔔</a></li>
+      <li class="nav-item"><a href="feedback.html" class="nav-link">Feedback</a></li>
+    </ul>
+  </header>
 
-        // Retrieve orphanage details from local storage
-        const orphanages = JSON.parse(localStorage.getItem('receiverDetails')) || [];
+  <h1>Orphanage Registration Form</h1>
+  <form id="orphanageForm">
+    <label for="orgName">Orphanage Name:</label>
+    <input type="text" name="orgName" id="orgName" placeholder="Enter orphanage name" required><br><br>
 
-        orphanages.forEach((orphanage, index) => {
-            const card = document.createElement('div');
-            card.classList.add('card');
+    <label for="location">Location Name:</label>
+    <input type="text" name="location" id="location" placeholder="Enter location name" required><br><br>
 
-            card.innerHTML = `
-                <h2>${orphanage.orgName}</h2>
-                <p><strong>Location:</strong> ${orphanage.location}</p>
-                <p><strong>Number of People:</strong> ${orphanage.peopleCount}</p>
-                <p><strong>Contact:</strong> ${orphanage.contactNumber}</p>
-                <p><strong>Email:</strong> ${orphanage.email}</p>
-                <button onclick="deleteOrphanage(${index})">Delete</button>
-            `;
+    <label for="lat">Latitude:</label>
+    <input type="float" name="lat" id="lat" placeholder="Enter latitude" required><br><br>
 
-            container.appendChild(card);
-        });
+    <label for="lon">Longitude:</label>
+    <input type="float" name="lon" id="lon" placeholder="Enter longitude" required><br><br>
 
-        function deleteOrphanage(index) {
-            const orphanages = JSON.parse(localStorage.getItem('receiverDetails')) || [];
-            orphanages.splice(index, 1); // Remove orphanage at specified index
-            localStorage.setItem('receiverDetails', JSON.stringify(orphanages)); // Update local storage
-            location.reload(); // Refresh the page to update the list
-        }
-    </script>
-       
-        <!-- Footer Section -->
-<footer style="background-color: #000000; color: #fff; padding: 20px 0; width:100%">
+    <label for="contactNumber">Contact Number:</label>
+    <input type="tel" name="contactNumber" id="contactNumber" placeholder="Enter contact number" pattern="[0-9]{10}" required><br><br>
+
+    <label for="email">Email Address:</label>
+    <input type="email" name="email" id="email" placeholder="Enter email address" required><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('orphanageForm');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent page reload
+
+      const orgName = document.getElementById('orgName').value;
+      const location = document.getElementById('location').value;
+      const lat = parseFloat(document.getElementById('lat').value);
+      const lon = parseFloat(document.getElementById('lon').value);
+      const contactNumber = document.getElementById('contactNumber').value;
+      const email = document.getElementById('email').value;
+
+      // Create a new orphanage object
+      const orphanageDetails = { orgName, location, lat, lon, contactNumber, email };
+
+      // Retrieve existing orphanage data from local storage
+      const existingOrphanages = JSON.parse(localStorage.getItem('orphanages')) || [];
+      existingOrphanages.push(orphanageDetails);
+
+      // Save updated orphanage data back to local storage
+      localStorage.setItem('orphanages', JSON.stringify(existingOrphanages));
+
+      alert("Orphanage registered successfully!");
+    });
+  </script>
+
+  <!-- Footer Section -->
+  <footer style="background-color: #000000; color: #fff; padding: 20px 0; width:100%">
     <div style="max-width: 100%; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between;">
       <!-- About Us -->
       <div style="flex: 1 1 250px; margin: 10px;">
@@ -87,20 +92,21 @@
       <!-- Contact Information -->
       <div style="flex: 1 1 250px; margin: 10px;">
         <h3>Contact Us</h3>
-        <p>SPMVV ,Tirupati</p>
-        <p>Email:kapulurubhuvaneeswarivspdbct@gmail.com</p>
+        <p>SPMVV, Tirupati</p>
+        <p>Email: kapulurubhuvaneeswarivspdbct@gmail.com</p>
         <p>Email: sravani30j@gmail.com</p>
       </div>
       <div style="flex: 1 1 250px; margin:10px;">
-          <h3>Follow Us</h3>
-         <p><a href="https://www.linkedin.com/in/akhila-kurimella-652470311?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Linkedin</a></p>
-     </div>
+        <h3>Follow Us on Linkedin</h3>
+        <p><a href="https://www.linkedin.com/in/akhila-kurimella-652470311?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Akhila</a></p>
+        <p><a href="https://www.linkedin.com/in/hemalatha-malapati-b0591030a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Hemalatha</a></p>
+      </div>
     </div>
+
     <!-- Footer Bottom -->
-    <div style="text-align: center; margin-top: 20px; font-size: 14px; color: #ccc;">
-      &copy; 2024 YourCompanyName. All rights reserved.
+    <div style="text-align: center; font-size: 14px; color: #ccc;">
+      &copy; 2024 Food Donate. All rights reserved.
     </div>
   </footer>
-  
 </body>
 </html>
