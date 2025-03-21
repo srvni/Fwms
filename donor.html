@@ -3,381 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Donation Form</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-            color: #4CAF50;
-        }
-
-        form {
-            max-width: 500px;
-            margin: 20px auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        input, select, button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        #suitable-orphanage-report {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        #suitable-orphanage-report h2 {
-            color: #4CAF50;
-        }
-
-        #suitable-orphanage-report div {
-            margin-bottom: 20px;
-        }
-
-        a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-            color: #4CAF50;
-        }
-
-        header {
-            background-color: #4CAF50;
-            color: #fff;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .hamburger .line {
-            width: 25px;
-            height: 3px;
-            background: #fff;
-            margin: 3px 0;
-        }
-
-        .nav-bar {
-            flex-grow: 1;
-            text-align: right;
-        }
-
-        .nav-bar ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            gap: 15px;
-        }
-
-        .nav-bar ul li {
-            display: inline;
-        }
-
-        .nav-bar ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 5px 10px;
-        }
-
-        .nav-bar ul li a:hover,
-        .nav-bar ul li a.active {
-            background: #45a049;
-            border-radius: 5px;
-        }
-
-        button {
-            background-color: #fff;
-            color: #4CAF50;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #e0e0e0;
-        }
-
-        form {
-            max-width: 500px;
-            margin: 20px auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        input, select, button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        #suitable-orphanage-report {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        #suitable-orphanage-report h2 {
-            color: #4CAF50;
-        }
-
-        #suitable-orphanage-report div {
-            margin-bottom: 20px;
-        }
-
-        a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .nav-bar ul {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-        }
-          
-      #myimg{
-        height:300px;
-        width:100%
-
-      }
-      #intro{
-        height:300px;
-        width:500px;
-      
-     }
-     header{
-        background-color:white;
-     }
-    </style>
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link href="style.css" rel="stylesheet"/></head>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>Donor Form</title>
+    <link rel="stylesheet" href="donor.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+QLD:wght@100..400&display=swap" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-          <img src="OIP (1).jpg" class="bi me-2" width="240px" height="100px"/>
-          <span class="fs-4" id="helping-bridge">Food Donate</span>
-        </a>
-    
-        <ul class="nav nav-pills">
-          
-          <li class="nav-item"><a href="index.html" class="nav-link" aria-current="page">Home</a></li>
-          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-          <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
-          <li class="nav-item"><a href="signup.html" class="nav-link">Signup</a></li>
-          <li class="nav-item"><a href="receiver.html" class="nav-link">Orphanage Form</a></li>
-          <li class="nav-item"><a href="donor.html" class="nav-link">Donor form</a></li>
-          <li class="nav-item"><a href="notifications.html" class="nav-link">🔔</a></li>
-          <li class="nav-item"><a href="feedback.html" class="nav-link">Feedback</a></li>
-              </ul>
-      </header>
-        
-    <h1>Food Donation Form</h1>
+  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <img src="OIP (1).jpg" class="bi me-2" width="240px" height="100px">
+      <span class="fs-4" id="helping-bridge">Food Donate</span>
+    </a>
 
-    <form id="donation-form">
-        <label for="donorName">Donor Name:</label>
-        <input type="text" id="donorName" required>
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a href="index.html" class="nav-link" aria-current="page">Home</a></li>
+      <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+      <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
+      <li class="nav-item"><a href="signup.html" class="nav-link">Signup</a></li>
+      <li class="nav-item"><a href="receiver.html" class="nav-link">Orphanage Form</a></li>
+      <li class="nav-item"><a href="donor.html" class="nav-link">Donor Form</a></li>
+      <li class="nav-item"><a href="notifications.html" class="nav-link">🔔</a></li>
+      <li class="nav-item"><a href="feedback.html" class="nav-link">Feedback</a></li>
+    </ul>
+  </header>
 
-        <label for="foodDetails">Food Details:</label>
-        <input type="text" id="foodDetails" required>
+  <h1>Donor Form</h1>
 
-        <label for="numPeople">Number of People:</label>
-        <input type="number" id="numPeople" required>
+  <form id="donorForm">
+    <button type="submit">Find Nearby Orphanages</button>
+  </form>
 
-        <label for="location">Location:</label>
-        <select id="location" required>
-            <option value="Alipiri">Alipiri</option>
-            <option value="Kapila Theertham">Kapila Theertham</option>
-            <option value="Govindaraja Swamy Temple">Govindaraja Swamy Temple</option>
-            <option value="Sri Venkateswara Zoo">Sri Venkateswara Zoo</option>
-        </select>
+  <div id="orphanagesList" style="display:none;">
+    <h2>Nearby Orphanages</h2>
+    <ul id="orphanageDetails">
+      <!-- Orphanages will be listed here -->
+    </ul>
+  </div>
 
-        <label for="foodType">Type of Food:</label>
-        <select id="foodType" required>
-            <option value="Rice">Rice</option>
-            <option value="Vegetables">Vegetables</option>
-            <option value="Fruits">Fruits</option>
-        </select>
-      <label for="donorLocation">Your Location:</label>
-        <input type="text" name="donorLocation" id="donorLocation" placeholder="Enter your location (City, Area)" required><br><br>
+  <script>
+    const donorForm = document.getElementById('donorForm');
+    const orphanagesList = document.getElementById('orphanagesList');
+    const orphanageDetails = document.getElementById('orphanageDetails');
 
-    
-        <button type="submit">Find nearby Orphanage</button>
-    </form>
+    // List of orphanages with their coordinates (latitude, longitude)
+    const orphanages = [
+      { name: 'Alipiri Orphanage', location: 'Alipiri', lat: 13.6500, lon: 79.4178 },
+      { name: 'Kapila Theertham Orphanage', location: 'Kapila Theertham', lat: 13.6240, lon: 79.4189 },
+      { name: 'Govindaraja Swamy Orphanage', location: 'Govindaraja Swamy Temple', lat: 13.6287, lon: 79.4175 },
+      { name: 'Sri Venkateswara Zoo Orphanage', location: 'Sri Venkateswara Zoo', lat: 13.6028, lon: 79.4001 },
+      { name: 'Chandragiri Fort Orphanage', location: 'Chandragiri Fort', lat: 13.5358, lon: 79.3033 },
+      { name: 'Tirumala Orphanage', location: 'Tirumala', lat: 13.6868, lon: 79.3550 }
+    ];
 
-    <div id="suitable-orphanage-report">
-        <!-- Suitable orphanage report will be displayed here -->
-    </div>
+    // Function to calculate distance between two lat-lon points in kilometers using Haversine formula
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371; // Radius of Earth in km
+      const dLat = (lat2 - lat1) * (Math.PI / 180);
+      const dLon = (lon2 - lon1) * (Math.PI / 180);
+      const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const distance = R * c; // Distance in km
+      return distance;
+    }
 
-    <script>
-        document.getElementById('donation-form').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent form submission
+    donorForm.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent page reload
 
-            const donorName = document.getElementById('donorName').value;
-            const foodDetails = document.getElementById('foodDetails').value;
-            const numPeople = parseInt(document.getElementById('numPeople').value, 10);
-            const location = document.getElementById('location').value;
-            const foodType = document.getElementById('foodType').value;
+      // Get the donor's current location using geolocation
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          const donorLat = position.coords.latitude;
+          const donorLon = position.coords.longitude;
 
-            // Retrieve orphanage details from local storage
-            const orphanages = JSON.parse(localStorage.getItem('receiverDetails')) || [];
+          // Filter orphanages based on distance from donor (e.g., within 20 km)
+          const nearbyOrphanages = orphanages.filter(orphanage => {
+            const distance = calculateDistance(donorLat, donorLon, orphanage.lat, orphanage.lon);
+            return distance <= 20; // Only show orphanages within 20 km
+          });
 
-            // Find the orphanage with the nearest number of people
-            let closestOrphanage = null;
-            let smallestDifference = Infinity;
-
-            orphanages.forEach(orphanage => {
-                const difference = Math.abs(orphanage.peopleCount - numPeople);
-
-                if (
-                    difference < smallestDifference || 
-                    (difference === smallestDifference && orphanage.location === location)
-                ) {
-                    smallestDifference = difference;
-                    closestOrphanage = orphanage;
-                }
+          // Display orphanage details
+          if (nearbyOrphanages.length > 0) {
+            orphanageDetails.innerHTML = ''; // Clear previous results
+            nearbyOrphanages.forEach(orphanage => {
+              const orphanageItem = document.createElement('li');
+              orphanageItem.innerHTML = `
+                <strong>${orphanage.name}</strong><br>
+                Location: ${orphanage.location}<br>
+                Distance: ${calculateDistance(donorLat, donorLon, orphanage.lat, orphanage.lon).toFixed(2)} km<br>
+                <hr>
+              `;
+              orphanageDetails.appendChild(orphanageItem);
             });
-
-            // Display the result
-            let reportHtml = '<h2>Suitable Orphanage:</h2>';
-
-            if (closestOrphanage) {
-                reportHtml += `
-                    <div>
-                        <h3>${closestOrphanage.orgName}</h3>
-                        <p><strong>Location:</strong> ${closestOrphanage.location}</p>
-                        <p><strong>Number of People:</strong> ${closestOrphanage.peopleCount}</p>
-                        <p><strong>Contact:</strong> ${closestOrphanage.contactNumber}</p>
-                        <p><a href="mailto:${closestOrphanage.email}">Email this orphanage</a></p>
-                        <p><a href="tel:${closestOrphanage.contactNumber}">Call this orphanage</a></p>
-                    </div>
-                `;
-            } else {
-                reportHtml += `<p>No suitable orphanages found. Please try again later.</p>`;
-            }
-
-            document.getElementById('suitable-orphanage-report').innerHTML = reportHtml;
+            orphanagesList.style.display = 'block'; // Show orphanages list
+          } else {
+            orphanageDetails.innerHTML = '<p>No nearby orphanages found within 20 km.</p>';
+            orphanagesList.style.display = 'block'; // Show message if no orphanages found
+          }
+        }, function(error) {
+          alert('Error getting location. Please enable location services.');
         });
-    </script>
-     <!-- Footer Section -->
-<footer style="background-color: #000000; color: #fff; padding: 20px 0; width:100%">
+      } else {
+        alert('Geolocation is not supported by this browser.');
+      }
+    });
+  </script>
+
+  <!-- Footer Section -->
+  <footer style="background-color: #000000; color: #fff; padding: 20px 0; width:100%">
     <div style="max-width: 100%; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between;">
       <!-- About Us -->
       <div style="flex: 1 1 250px; margin: 10px;">
@@ -390,22 +127,23 @@
       <!-- Contact Information -->
       <div style="flex: 1 1 250px; margin: 10px;">
         <h3>Contact Us</h3>
-        <p>SPMVV ,Tirupati</p>
-        <p>Email:kapulurubhuvaneeswarivspdbct@gmail.com</p>
+        <p>SPMVV, Tirupati</p>
+        <p>Email: kapulurubhuvaneeswarivspdbct@gmail.com</p>
         <p>Email: sravani30j@gmail.com</p>
       </div>
       <div style="flex: 1 1 250px; margin:10px;">
-          <h3>Follow Us on Linkedin</h3>
-         <p><a href="https://www.linkedin.com/in/akhila-kurimella-652470311?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Akhila</a></p>
-           <p><a href="https://www.linkedin.com/in/hemalatha-malapati-b0591030a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Hemalatha</p>
-     </div>
+        <h3>Follow Us on Linkedin</h3>
+        <p><a href="https://www.linkedin.com/in/akhila-kurimella-652470311?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Akhila</a></p>
+        <p><a href="https://www.linkedin.com/in/hemalatha-malapati-b0591030a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Hemalatha</a></p>
+      </div>
     </div>
-    
+
     <!-- Footer Bottom -->
-    <div style="text-align: center; margin-top: 20px; font-size: 14px; color: #ccc;">
-      &copy; 2024 YourCompanyName. All rights reserved.
+    <div style="text-align: center; font-size: 14px; color: #ccc;">
+      &copy; 2024 Food Donate. All rights reserved.
     </div>
   </footer>
-  
+
 </body>
 </html>
+
