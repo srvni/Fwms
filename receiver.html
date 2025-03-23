@@ -125,6 +125,9 @@
 
         <button type="submit">Register</button>
         <div id="successMessage">✅ Registration Successful!</div>
+        <br>
+        <br>
+        <br>
     </form>
 
     <div id="registeredOrphanages">
@@ -178,6 +181,47 @@
                 document.getElementById('orphanageForm').style.display = 'none';
             }, 2000);
         });
+        document.getElementById('orphanageForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const newOrphanage = {
+        name: document.getElementById('name').value,
+        place: document.getElementById('location').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value
+    };
+
+    orphanages.push(newOrphanage);
+    displayOrphanages();
+
+    document.getElementById('successMessage').style.display = 'block';
+
+    setTimeout(() => {
+        document.getElementById('successMessage').style.display = 'none';
+        document.getElementById('orphanageForm').reset();
+        document.getElementById('orphanageForm').style.display = 'none';
+
+        // Hide header and footer
+        document.querySelector('header').style.display = 'none';
+        document.querySelector('footer').style.display = 'none';
+
+        // Show "Go Back" button
+        const goBackBtn = document.createElement('button');
+        goBackBtn.innerText = 'Go Back';
+        goBackBtn.style.cssText = 'margin-top: 15px; padding: 10px; background: #4CAF50; color: white; border: none; cursor: pointer; border-radius: 5px;';
+        goBackBtn.addEventListener('click', () => {
+            // Restore header, footer, and form
+            document.querySelector('header').style.display = 'block';
+            document.querySelector('footer').style.display = 'block';
+            document.getElementById('orphanageForm').style.display = 'block';
+            registeredSection.style.display = 'none'; // Hide orphanage list again
+            goBackBtn.remove(); // Remove button after clicking
+        });
+
+        registeredSection.appendChild(goBackBtn);
+    }, 2000);
+});
+
     </script>
      <footer style="background-color: #000000; color: #fff; padding: 20px 0; width:100%">
     <div style="max-width: 100%; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between;">
