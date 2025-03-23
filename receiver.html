@@ -164,6 +164,7 @@
         ];
     
 
+
 const orphanageList = document.getElementById('orphanageList');
 const registeredSection = document.getElementById('registeredOrphanages');
 
@@ -193,8 +194,10 @@ document.getElementById('orphanageForm').addEventListener('submit', function (ev
     document.getElementById('successMessage').style.display = 'block';
 
     setTimeout(() => {
-        // Hide the form after registration
+        // Hide the form, header, and footer after registration
         document.getElementById('orphanageForm').style.display = 'none';
+        document.getElementById('header').style.display = 'none';
+        document.getElementById('footer').style.display = 'none';
 
         document.getElementById('successMessage').style.display = 'none';
 
@@ -203,8 +206,10 @@ document.getElementById('orphanageForm').addEventListener('submit', function (ev
         goBackBtn.innerText = 'Go Back';
         goBackBtn.style.cssText = 'margin-top: 5px; padding: 10px; background: #4CAF50; color: white; border: none; cursor: pointer; border-radius: 5px;';
         goBackBtn.addEventListener('click', () => {
-            // Restore the form when "Go Back" is clicked
+            // Restore the form, header, and footer when "Go Back" is clicked
             document.getElementById('orphanageForm').style.display = 'block';
+            document.getElementById('header').style.display = 'block';
+            document.getElementById('footer').style.display = 'block';
             document.getElementById('registeredOrphanages').style.display = 'none'; // Hide orphanage list again
             goBackBtn.remove(); // Remove button after clicking
         });
