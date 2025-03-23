@@ -112,22 +112,23 @@
         navigator.geolocation.getCurrentPosition(position => {
             const donorLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
             map = L.map('map').setView([donorLocation.lat, donorLocation.lng], 12);
-
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
+            let nearestDistance = Infinity;
             let nearestIndex = 0;
-            let shortestDistance = Infinity;
 
             orphanages.forEach((o, index) => {
                 const [lat, lon] = o.location.split(",").map(Number);
                 const distance = getDistance(donorLocation.lat, donorLocation.lng, lat, lon).toFixed(1);
-                if (distance < shortestDistance) {
-                    shortestDistance = distance;
+                document.getElementById("orphanage").innerHTML += `<option value="${o.name}" data-phone="${o.phone}" data-email="${o.email}">${o.name} (${o.place}) - ${distance} km away</option>`;
+
+                if (distance < nearestDistance) {
+                    nearestDistance = distance;
                     nearestIndex = index;
                 }
-                document.getElementById("orphanage").innerHTML += `<option value="${o.name}" data-phone="${o.phone}" data-email="${o.email}">${o.name} (${o.place}) - ${distance} km away</option>`;
             });
-            document.getElementById("orphanage").selectedIndex = nearestIndex;
+
+            document.getElementById("orphanage").selectedIndex = nearestIndex + 1;
         });
 
         document.getElementById("donorForm").addEventListener("submit", e => {
