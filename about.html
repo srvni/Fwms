@@ -131,6 +131,38 @@
       
 
      </div>
+     <br><br><br><h2 style="text-align: center; font-size: 28px; color: darkslategray;">Our Feedbacks</h2>
+
+     <div id="feedbackContainer" style="max-width: 600px; margin: auto; padding: 20px; background-color: #f5deb3; border-radius: 10px; text-align: center; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);">
+     </div>
+     
+     <script>
+         document.addEventListener("DOMContentLoaded", function () {
+             var feedbackList = JSON.parse(localStorage.getItem('userFeedbacks')) || [];
+             var feedbackContainer = document.getElementById('feedbackContainer');
+     
+             if (feedbackList.length > 0) {
+                 feedbackContainer.innerHTML = feedbackList.map(feedback => `
+                     <div style="
+                         background-color: white; 
+                         padding: 15px; 
+                         margin: 10px 0; 
+                         border-radius: 10px; 
+                         box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+                         font-size: 16px;
+                         color: black;
+                         text-align: left;
+                     ">
+                         ${feedback}
+                     </div>
+                 `).join("");
+             } else {
+                 feedbackContainer.innerHTML = "<p style='color: gray;'>No feedback available yet.</p>";
+             }
+         });
+     </script>
+     
+     
        <!-- Footer Section -->
 <footer style="background-color: #000000; color: #fff; padding: 20px 0; width:100%">
     <div style="max-width: 100%; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between;">
@@ -155,6 +187,7 @@
           <p><a href="https://www.linkedin.com/in/hemalatha-malapati-b0591030a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Hemalatha</a></p>
      </div>
     </div>
+    
   <!-- Footer Bottom -->
   <div style="text-align: center; margin-top: 20px; font-size: 14px; color: #ccc;">
     &copy; 2024 YourCompanyName. All rights reserved.
