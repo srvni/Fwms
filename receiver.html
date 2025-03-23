@@ -162,40 +162,22 @@
             { name: "Children's Joy Home", location: "13.6369,79.4241", place: "Leela Mahal Circle", phone: "+91 98765 43219", email: "joyhome@orph.com" },
             { name: "Happy Hearts Shelter", location: "13.6330,79.4260", place: "Bairagi Patteda", phone: "+91 98765 43220", email: "happyhearts@orph.com" }
         ];
-        const orphanageList = document.getElementById('orphanageList');
-        const registeredSection = document.getElementById('registeredOrphanages');
+    
 
-        function displayOrphanages() {
-            orphanageList.innerHTML = '';
-            orphanages.forEach(orphanage => {
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `<strong>${orphanage.name}</strong><br>📍 ${orphanage.place}<br>📞 ${orphanage.phone}<br>📧 ${orphanage.email}`;
-                orphanageList.appendChild(listItem);
-            });
-            registeredSection.style.display = 'block';
-        }
+const orphanageList = document.getElementById('orphanageList');
+const registeredSection = document.getElementById('registeredOrphanages');
 
-        document.getElementById('orphanageForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+function displayOrphanages() {
+    orphanageList.innerHTML = '';
+    orphanages.forEach(orphanage => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `<strong>${orphanage.name}</strong><br>📍 ${orphanage.place}<br>📞 ${orphanage.phone}<br>📧 ${orphanage.email}`;
+        orphanageList.appendChild(listItem);
+    });
+    registeredSection.style.display = 'block';
+}
 
-            const newOrphanage = {
-                name: document.getElementById('name').value,
-                place: document.getElementById('location').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value
-            };
-
-            orphanages.push(newOrphanage);
-            displayOrphanages();
-
-            document.getElementById('successMessage').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'none';
-                document.getElementById('orphanageForm').reset();
-                document.getElementById('orphanageForm').style.display = 'none';
-            }, 2000);
-        });
-        document.getElementById('orphanageForm').addEventListener('submit', function (event) {
+document.getElementById('orphanageForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
     const newOrphanage = {
@@ -211,30 +193,26 @@
     document.getElementById('successMessage').style.display = 'block';
 
     setTimeout(() => {
-        document.getElementById('successMessage').style.display = 'none';
-        document.getElementById('orphanageForm').reset();
+        // Hide the form after registration
         document.getElementById('orphanageForm').style.display = 'none';
 
-        // Hide header and footer
-        document.querySelector('header').style.display = 'none';
-        document.querySelector('footer').style.display = 'none';
+        document.getElementById('successMessage').style.display = 'none';
 
         // Show "Go Back" button
         const goBackBtn = document.createElement('button');
         goBackBtn.innerText = 'Go Back';
         goBackBtn.style.cssText = 'margin-top: 5px; padding: 10px; background: #4CAF50; color: white; border: none; cursor: pointer; border-radius: 5px;';
         goBackBtn.addEventListener('click', () => {
-            // Restore header, footer, and form
-            document.querySelector('header').style.display = 'block';
-            document.querySelector('footer').style.display = 'block';
+            // Restore the form when "Go Back" is clicked
             document.getElementById('orphanageForm').style.display = 'block';
-            registeredSection.style.display = 'none'; // Hide orphanage list again
+            document.getElementById('registeredOrphanages').style.display = 'none'; // Hide orphanage list again
             goBackBtn.remove(); // Remove button after clicking
         });
 
-        registeredSection.appendChild(goBackBtn);
+        document.getElementById('registeredOrphanages').appendChild(goBackBtn);
     }, 2000);
 });
+
 
     </script>
      <footer style="background-color: #000000; color: #fff; padding: 20px 0; width:100%">
