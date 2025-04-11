@@ -1,151 +1,70 @@
-<!DOCTYPE html>
+orphanage.html displays orph list <!DOCTYPE html>
 <html>
 <head>
-    <title>Orphanage Registration Form</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            flex-direction: column;
-        }
-        h1 { color: #4CAF50; text-align: center; }
-        form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            margin-bottom: 20px;
-        }
-        label, input {
-            display: block;
-            margin-bottom: 10px;
-            width: calc(100% - 16px);
-            padding: 8px;
-        }
-        button {
-            background: #4CAF50;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            width: 100%;
-        }
-        button:hover { background: #45a049; }
-        #successMessage {
-            display: none;
-            color: #4CAF50;
-            margin-top: 10px;
-            text-align: center;
-            font-weight: bold;
-        }
-        #registeredOrphanages {
-            display: none;
-            background: #fff;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
-            text-align: center;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        #registeredOrphanages h2 {
-            color: #4CAF50;
-            margin-bottom: 10px;
-        }
-        #orphanageList {
-            list-style: none;
-            padding: 0;
-        }
-        #orphanageList li {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 10px;
-        }
-        #orphanageList li strong {
-            color: #4CAF50;
-        }
-    </style>
+  <title>Registered Orphanages</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 40px;
+      text-align: center;
+    }
+    h1 {
+      color: #4CAF50;
+    }
+    .container {
+      background: #fff;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 10px;
+      padding: 10px;
+      text-align: left;
+    }
+    strong {
+      color: #4CAF50;
+    }
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #4CAF50;
+    }
+  </style>
 </head>
 <body>
-    <form id="orphanageForm">
-        <h1>Orphanage Registration</h1>
-        <label for="name">Orphanage Name:</label>
-        <input type="text" id="name" required>
 
-        <label for="location">Location:</label>
-        <input type="text" id="location" required>
+  <h1>Registered Orphanages</h1>
+  <div class="container">
+    <ul id="orphanageList"></ul>
+  </div>
 
-        <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" required>
+  <a href="orphanages.html">Back to Registration</a>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" required>
+  <script>
+    const list = document.getElementById('orphanageList');
+    const orphanages = JSON.parse(localStorage.getItem('orphanages')) || [];
 
-        <button type="submit">Register</button>
-        <div id="successMessage">✅ Registration Successful!</div>
-    </form>
-
-    <div id="registeredOrphanages">
-        <h2>Registered Orphanages</h2>
-        <ul id="orphanageList"></ul>
-    </div>
-
-    <script>
-        const orphanages = [
-            { name: "Hope Children's Home", place: "Tirupati Central", phone: "+91 98765 43210", email: "hope@orph.com" },
-            { name: "Bright Future Orphanage", place: "Tiruchanoor", phone: "+91 98765 43211", email: "brightfuture@orph.com" },
-            { name: "Safe Haven Kids Home", place: "Renigunta", phone: "+91 98765 43212", email: "safehaven@orph.com" },
-            { name: "Little Stars Orphanage", place: "Chandragiri", phone: "+91 98765 43213", email: "littlestars@orph.com" },
-            { name: "New Beginnings Home", place: "Alipiri", phone: "+91 98765 43214", email: "newbeginnings@orph.com" },
-            { name: "Sunshine Children's Shelter", place: "SV Zoo", phone: "+91 98765 43215", email: "sunshine@orph.com" },
-            { name: "Faithful Hearts Orphanage", place: "Kapilatheertham", phone: "+91 98765 43216", email: "faithfulhearts@orph.com" },
-            { name: "Bright Horizons Home", place: "Peruru", phone: "+91 98765 43217", email: "brighthorizons@orph.com" },
-            { name: "Caring Hands Shelter", place: "RC Road", phone: "+91 98765 43218", email: "caringhands@orph.com" }
-        ];
-
-        const orphanageList = document.getElementById('orphanageList');
-        const registeredSection = document.getElementById('registeredOrphanages');
-
-        function displayOrphanages() {
-            orphanageList.innerHTML = '';
-            orphanages.forEach(orphanage => {
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `<strong>${orphanage.name}</strong><br>📍 ${orphanage.place}<br>📞 ${orphanage.phone}<br>📧 ${orphanage.email}`;
-                orphanageList.appendChild(listItem);
-            });
-            registeredSection.style.display = 'block';
-        }
-
-        document.getElementById('orphanageForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const newOrphanage = {
-                name: document.getElementById('name').value,
-                place: document.getElementById('location').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value
-            };
-
-            orphanages.push(newOrphanage);
-            displayOrphanages();
-
-            document.getElementById('successMessage').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'none';
-                document.getElementById('orphanageForm').reset();
-                document.getElementById('orphanageForm').style.display = 'none';
-            }, 2000);
-        });
-    </script>
+    orphanages.forEach((o, index) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <strong>${o.name}</strong><br>
+        📍 Location: ${o.location}<br>
+        👨‍👩‍👧‍👦 Number of People: ${o.people}<br>
+        📞 Phone: ${o.phone}<br>
+        📧 Email: ${o.email}
+      `;
+      list.appendChild(li);
+    });
+  </script>
 </body>
 </html>
