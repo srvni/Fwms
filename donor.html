@@ -1,167 +1,194 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Food Donation Form with Map</title>
-   <style>
-      body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        h1 { color: #4CAF50; }
-        form { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 300px; }
-        label, input, select { display: block; margin-bottom: 10px; width: 100%; padding: 8px; box-sizing: border-box; }
-        button { background: #4CAF50; color: #fff; border: none; padding: 10px; cursor: pointer; width: 100%; }
-        button:hover { background: #45a049; }
-        #map { height: 400px; width: 100%; margin-bottom: 20px; border-radius: 10px; }
-        #confirmation { display: none; margin-top: 20px; color: #4CAF50; font-weight: bold; }
-        #contactInfo { display: none; margin-top: 10px; color: #333; font-style: italic; }
-         
-    </style>
-      
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donor Registration Form</title>
+
+<style>
+body {
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+input, select, button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+}
+button {
+    margin-top: 15px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background: #45a049;
+}
+.terms {
+    margin-top: 10px;
+    font-size: 14px;
+}
+#message {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+</style>
+
 </head>
 
 <body>
-   <header style="background-color: #ffffff; padding: 10px 0; width: 100%; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
-  <div class="logo" style="color: #333; font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 10px;">
-    Food <b style="color: green;">Donate</b>
-  </div>
 
-  <nav style="display: flex; justify-content: center; gap: 10px; align-items: center;">
-    <a href="index.html" style="text-decoration: none;">
-      <button style="color: #333; padding: 5px 8px; border: 1px solid #069fc1; cursor: pointer; background: #fff; border-radius: 7px;">Home</button>
-    </a>
-    <a href="about.html" style="text-decoration: none;">
-      <button style="color: #333; padding: 5px 8px; border: 1px solid #069fc1; cursor: pointer; background: #fff; border-radius: 7px;">About</button>
-    </a>
-    <a href="login.html" style="text-decoration: none;">
-      <button style="color: #333; padding: 5px 8px; border: 1px solid #069fc1; cursor: pointer; background: #fff; border-radius: 7px;">Login</button>
-    </a>
-    <a href="signup.html" style="text-decoration: none;">
-      <button style="color: #333; padding: 5px 8px; border: 1px solid #069fc1; cursor: pointer; background: #fff; border-radius: 7px;">Signup</button>
-    </a>
-    <a href="receiver.html" style="text-decoration: none;">
-      <button style="color: #333; padding: 5px 8px; border: 1px solid #069fc1; cursor: pointer; background: #fff; border-radius: 7px;">Orphanage Form</button>
-    </a>
-    <a href="donor.html" style="text-decoration: none;">
-      <button style="color: #333; padding: 5px 8px; border: 1px solid #069fc1; cursor: pointer; background: #fff; border-radius: 7px;">Donor Form</button>
-    </a>
-    <a href="notifications.html" style="text-decoration: none;">
-      <button style="padding: 5px 8px; border: 1px solid #069fc1; cursor: pointer; background: #fff; border-radius: 7px;">🔔</button>
-    </a>
-    <a href="feedback.html" style="text-decoration: none;">
-      <button style="color: #333; padding: 5px 8px; border: 1px solid #069fc1; cursor: pointer; background: #fff; border-radius: 7px;">Feedback</button>
-    </a>
-  </nav>
-</header>
+<div class="container">
 
-<br>
-    <br>
-    <br>
-     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-     <div id="map"></div>
-    <form id="donorForm">
-        <label for="donorName">Donor Name:</label>
-        <input type="text" id="donorName" required>
+<h2 id="formTitle">Donor Registration Form</h2>
 
-        <label for="foodDetails">Food Details:</label>
-        <input type="text" id="foodDetails" required>
+<form id="donorForm">
+    <label>Name:</label>
+    <input type="text" id="name" required>
 
-        <label for="contactNumber">Contact Number:</label>
-        <input type="tel" id="contactNumber" required>
+    <label>Phone Number:</label>
+    <input type="text" id="phone" required>
 
-        <label for="orphanage">Select Orphanage:</label>
-        <select id="orphanage" required>
-            <option>Loading orphanages...</option>
-        </select>
+    <button type="button" onclick="sendOTP()">Send OTP</button>
 
-        <button type="submit">Donate</button>
-    </form>
+    <label>Enter OTP:</label>
+    <input type="text" id="otp" required>
 
-    <div id="confirmation">✅ Orphanage Selected! Please review and submit the form.</div>
-    <div id="contactInfo"></div>
+    <label>Event Date:</label>
+    <input type="date" id="eventDate" required onchange="validateDate()">
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
- <script>
-        let map;
-        const orphanages = [
-            { name: "Hope Children's Home", location: "13.6288,79.4192", place: "Tirupati Central", phone: "+91 98765 43210", email: "hope@orph.com" },
-            { name: "Bright Future Orphanage", location: "13.6205,79.4414", place: "Tiruchanoor", phone: "+91 98765 43211", email: "brightfuture@orph.com" },
-            { name: "Safe Haven Kids Home", location: "13.6536,79.5129", place: "Renigunta", phone: "+91 98765 43212", email: "safehaven@orph.com" },
-            { name: "Little Stars Orphanage", location: "13.5777,79.2939", place: "Chandragiri", phone: "+91 98765 43213", email: "littlestars@orph.com" },
-            { name: "New Beginnings Home", location: "13.6517,79.4216", place: "Alipiri", phone: "+91 98765 43214", email: "newbeginnings@orph.com" },
-            { name: "Sunshine Children's Shelter", location: "13.6308,79.4377", place: "SV Zoo", phone: "+91 98765 43215", email: "sunshine@orph.com" },
-            { name: "Faithful Hearts Orphanage", location: "13.6315,79.4159", place: "Kapilatheertham", phone: "+91 98765 43216", email: "faithfulhearts@orph.com" },
-            { name: "Bright Horizons Home", location: "13.6464,79.4248", place: "Peruru", phone: "+91 98765 43217", email: "brighthorizons@orph.com" },
-            { name: "Caring Hands Shelter", location: "13.6354,79.4279", place: "RC Road", phone: "+91 98765 43218", email: "caringhands@orph.com" },
-            { name: "Children's Joy Home", location: "13.6369,79.4241", place: "Leela Mahal Circle", phone: "+91 98765 43219", email: "joyhome@orph.com" },
-            { name: "Happy Hearts Shelter", location: "13.6330,79.4260", place: "Bairagi Patteda", phone: "+91 98765 43220", email: "happyhearts@orph.com" }
-        ];
+    <label>Reason for Donation:</label>
+    <select id="reason" required>
+        <option value="">Select</option>
+        <option value="Fresh Food">Fresh Food</option>
+        <option value="Leftover Food">Leftover Food</option>
+    </select>
 
-        function getDistance(lat1, lon1, lat2, lon2) {
-            const R = 6371;
-            const dLat = (lat2 - lat1) * (Math.PI / 180);
-            const dLon = (lon2 - lon1) * (Math.PI / 180);
-            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        }
+    <label>Food Details:</label>
+    <input type="text" id="foodDetails" required>
 
-        navigator.geolocation.getCurrentPosition(position => {
-            const donorLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
-            map = L.map('map').setView([donorLocation.lat, donorLocation.lng], 12);
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-            let nearest = null, minDistance = 9999;
-            orphanages.forEach(o => {
-                const [lat, lon] = o.location.split(",").map(Number);
-                const distance = getDistance(donorLocation.lat, donorLocation.lng, lat, lon);
-                if (distance <= 3 && distance < minDistance) {
-                    minDistance = distance;
-                    nearest = o.name;
-                }
-                document.getElementById("orphanage").innerHTML += `<option value="${o.name}" ${o.name === nearest ? 'selected' : ''}>${o.name} (${o.place}) - ${distance.toFixed(1)} km away</option>`;
-            });
-        });
-    </script>
-
-      
-
-    
-</body>
-    <footer style="background-color: #000000; color: #fff; padding: 20px 0; width:100%">
-    <div style="max-width: 100%; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between;">
-      <!-- About Us -->
-      <div style="flex: 1 1 250px; margin: 10px;">
-        <h3>About Us</h3>
-        <p>
-          We are dedicated to delivering top-notch services and creating value for our customers. 
-          Learn more about our mission and values.
-        </p>
-      </div>
-      <!-- Contact Information -->
-      <div style="flex: 1 1 250px; margin: 10px;">
-        <h3>Contact Us</h3>
-        <p>SPMVV ,Tirupati</p>
-        <p>Email:kapulurubhuvaneeswarivspdbct@gmail.com</p>
-        <p>Email: sravani30j@gmail.com</p>
-      </div>
-      <div style="flex: 1 1 250px; margin:10px;">
-          <h3>Follow Us on Linkedin</h3>
-          <p><a href="https://www.linkedin.com/in/akhila-kurimella-652470311?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Akhila</a></p>
-          <p><a href="https://www.linkedin.com/in/hemalatha-malapati-b0591030a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Hemalatha</a></p>
-     </div>
+    <div class="terms">
+        <input type="checkbox" id="terms" onclick="redirectToTerms()"> I Accept Terms and Conditions
     </div>
-  <!-- Footer Bottom -->
-  <div style="text-align: center; margin-top: 20px; font-size: 14px; color: #ccc;">
-    &copy; 2024 YourCompanyName. All rights reserved.
-  </div>
-</footer>
+
+    <div id="locationSection" style="display:none;">
+        <label>Enter Your Location:</label>
+        <input type="text" id="location" required oninput="suggestOrphanage()">
+
+        <label>Nearby Orphanage:</label>
+        <input type="text" id="orphanage" readonly>
+    </div>
+
+    <button type="button" id="confirmBtn" style="display:none;" onclick="submitForm()">Confirm & Register</button>
+</form>
+
+<div id="message"></div>
+
+</div>
+
+<script>
+let sessionId = "";
+
+window.onload = function() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('agreed') === 'true') {
+        document.getElementById('locationSection').style.display = 'block';
+    }
+}
+
+function redirectToTerms(){
+    window.location.href = "terms.html";
+}
+
+function sendOTP() {
+    const phone = document.getElementById('phone').value;
+    if(phone.length != 10){
+        alert('Enter Valid 10-digit Mobile Number');
+        return;
+    }
+
+    fetch(`https://2factor.in/API/V1/YOUR_API_KEY/SMS/${phone}/AUTOGEN`)
+    .then(response => response.json())
+    .then(data => {
+        if(data.Status == "Success"){
+            sessionId = data.Details;
+            alert('OTP Sent Successfully');
+        } else {
+            alert('Error Sending OTP');
+        }
+    });
+}
+
+function validateDate() {
+    const eventDate = document.getElementById('eventDate').value;
+    const today = new Date().toISOString().split('T')[0];
+    if (eventDate !== today) {
+        document.getElementById('donorForm').style.display = 'none';
+        document.getElementById('formTitle').style.display = 'none';
+        document.getElementById('message').style.display = 'block';
+        document.getElementById('message').innerHTML = "You are not eligible to donate as event date does not match with today's date!";
+    }
+}
+
+function suggestOrphanage(){
+    const location = document.getElementById('location').value.toLowerCase();
+    let orphanage = "";
+
+    if(location.includes("hyderabad")){
+        orphanage = "Hope Orphanage - Hyderabad";
+    } else if(location.includes("secunderabad")){
+        orphanage = "Care Home - Secunderabad";
+    } else {
+        orphanage = "Helping Hands Orphanage - Nearby";
+    }
+
+    document.getElementById('orphanage').value = orphanage;
+    document.getElementById('confirmBtn').style.display = 'block';
+}
+
+function submitForm() {
+    const otp = document.getElementById('otp').value;
+    if (otp.length != 4) {
+        alert('Enter Valid OTP');
+        return;
+    }
+
+    fetch(`https://2factor.in/API/V1/YOUR_API_KEY/SMS/VERIFY/${sessionId}/${otp}`)
+    .then(response => response.json())
+    .then(data => {
+        if (data.Status == "Success") {
+            document.getElementById('donorForm').style.display = 'none';
+            document.getElementById('formTitle').style.display = 'none';
+            document.getElementById('message').style.display = 'block';
+            document.getElementById('message').innerHTML = `
+                <h3>🎉 Registration & Donation Successful! 🎉</h3>
+                <p>Thank you for your valuable contribution!</p>
+            `;
+        } else {
+            alert('Incorrect OTP');
+        }
+    });
+}
+</script>
+
+</body>
 </html>
 
 
