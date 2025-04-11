@@ -1,193 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Donor Registration Form</title>
-
-<style>
-body {
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-.container {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    width: 400px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-input, select, button {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-}
-button {
-    margin-top: 15px;
-    background: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-button:hover {
-    background: #45a049;
-}
-.terms {
-    margin-top: 10px;
-    font-size: 14px;
-}
-#message {
-    display: none;
-    text-align: center;
-    margin-top: 20px;
-}
-</style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donor Registration Form</title>
+  <style>
+    body {
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-height: 95vh;
+      overflow-y: auto;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 15px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .terms {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    .terms ul {
+      padding-left: 20px;
+      font-size: 13px;
+      margin-top: 5px;
+    }
+    .terms-accept {
+      display: flex;
+      align-items: center;
+      gap: 2px; /* Space between checkbox and text */
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    
+    #message {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 
 <body>
-
 <div class="container">
+  <h2 id="formTitle">Donor Registration Form</h2>
 
-<h2 id="formTitle">Donor Registration Form</h2>
-
-<form id="donorForm">
+  <form id="donorForm">
     <label>Name:</label>
-    <input type="text" id="name" required>
+    <input type="text" id="name" required />
 
     <label>Phone Number:</label>
-    <input type="text" id="phone" required>
+    <input type="text" id="phone" required />
 
-    <button type="button" onclick="sendOTP()">Send OTP</button>
+    <button type="button" onclick="sendOTP()">Send Code</button>
 
-    <label>Enter OTP:</label>
-    <input type="text" id="otp" required>
+    <label>Enter Code:</label>
+    <input type="text" id="otp" required />
 
     <label>Event Date:</label>
-    <input type="date" id="eventDate" required onchange="validateDate()">
+    <input type="date" id="eventDate" required onchange="validateDate()" />
 
     <label>Reason for Donation:</label>
     <select id="reason" required>
-        <option value="">Select</option>
-        <option value="Fresh Food">Fresh Food</option>
-        <option value="Leftover Food">Leftover Food</option>
+      <option value="">Select</option>
+      <option value="Fresh Food from Event">I want to donate fresh food items from event</option>
+      <option value="Leftover Food from Event">I want to donate leftover food from event</option>
+      <option value="Sponsor Meal for Kids">I want to sponsor a meal for kids</option>
+      <option value="Donate Groceries or Essentials">I want to donate groceries or essentials</option>
+      <option value="Special Day Donation">I want to celebrate my special day by donating food</option>
     </select>
 
     <label>Food Details:</label>
-    <input type="text" id="foodDetails" required>
+    <input type="text" id="foodDetails" required />
 
     <div class="terms">
-        <input type="checkbox" id="terms" onclick="redirectToTerms()"> I Accept Terms and Conditions
-    </div>
+      <p><strong>Terms and Conditions:</strong></p>
+      <ul>
+        <li>Alcohol, tobacco, or any hazardous items that may pose health risks are strictly prohibited.</li>
+        <li>Any food items that violate local health regulations cannot be donated.</li>
+        <li>In case of any complaints regarding food quality, the donor will be responsible.</li>
+        <li>Any misconduct, exploitation, or misuse of the platform will result in necessary action.</li>
+      </ul>
+      <div class="terms-accept">
+        <input type="checkbox" id="terms" onclick="getLocation()" />
+        <label for="terms">I accept terms&conditions</label>
+      </div>
+      
+      
 
     <div id="locationSection" style="display:none;">
-        <label>Enter Your Location:</label>
-        <input type="text" id="location" required oninput="suggestOrphanage()">
+      <label>Your Location (Lat, Long):</label>
+      <input type="text" id="location" readonly />
 
-        <label>Nearby Orphanage:</label>
-        <input type="text" id="orphanage" readonly>
+      <label>Nearby Orphanage:</label>
+      <input type="text" id="orphanage" readonly />
     </div>
 
     <button type="button" id="confirmBtn" style="display:none;" onclick="submitForm()">Confirm & Register</button>
-</form>
+  </form>
 
-<div id="message"></div>
-
+  <div id="message"></div>
 </div>
 
 <script>
-let sessionId = "";
+  let sessionId = "";
 
-window.onload = function() {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('agreed') === 'true') {
-        document.getElementById('locationSection').style.display = 'block';
-    }
-}
-
-function redirectToTerms(){
-    window.location.href = "terms.html";
-}
-
-function sendOTP() {
+  function sendOTP() {
     const phone = document.getElementById('phone').value;
-    if(phone.length != 10){
-        alert('Enter Valid 10-digit Mobile Number');
-        return;
+    if (phone.length != 10) {
+      alert('Enter Valid 10-digit Mobile Number');
+      return;
     }
 
     fetch(`https://2factor.in/API/V1/2a0e1aa8-15fa-11f0-8b17-0200cd936042/SMS/${phone}/AUTOGEN`)
-    .then(response => response.json())
-    .then(data => {
-        if(data.Status == "Success"){
-            sessionId = data.Details;
-            alert('OTP Sent Successfully');
+      .then(response => response.json())
+      .then(data => {
+        if (data.Status == "Success") {
+          sessionId = data.Details;
+          alert('Code Sent Successfully');
         } else {
-            alert('Error Sending OTP');
+          alert('Error Sending Code');
         }
-    });
-}
+      });
+  }
 
-function validateDate() {
+  function validateDate() {
     const eventDate = document.getElementById('eventDate').value;
     const today = new Date().toISOString().split('T')[0];
     if (eventDate !== today) {
-        document.getElementById('donorForm').style.display = 'none';
-        document.getElementById('formTitle').style.display = 'none';
-        document.getElementById('message').style.display = 'block';
-        document.getElementById('message').innerHTML = "You are not eligible to donate as event date does not match with today's date!";
+      document.getElementById('donorForm').style.display = 'none';
+      document.getElementById('formTitle').style.display = 'none';
+      document.getElementById('message').style.display = 'block';
+      document.getElementById('message').innerHTML = "You are not eligible to donate as event date does not match with today's date!";
     }
-}
+  }
 
-function suggestOrphanage(){
-    const location = document.getElementById('location').value.toLowerCase();
-    let orphanage = "";
+  function getLocation() {
+    const checkbox = document.getElementById('terms');
+    const locationSection = document.getElementById('locationSection');
+    const locationField = document.getElementById('location');
 
-    if(location.includes("hyderabad")){
-        orphanage = "Hope Orphanage - Hyderabad";
-    } else if(location.includes("secunderabad")){
-        orphanage = "Care Home - Secunderabad";
+    if (checkbox.checked) {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function(position) {
+            const lat = position.coords.latitude.toFixed(5);
+            const lon = position.coords.longitude.toFixed(5);
+            const coords = `${lat}, ${lon}`;
+            locationField.value = coords;
+            locationSection.style.display = 'block';
+            suggestOrphanage(lat, lon);
+            document.getElementById('confirmBtn').style.display = 'block';
+          },
+          function(error) {
+            alert("Location access denied or failed. Please enable location and try again.");
+            checkbox.checked = false;
+          }
+        );
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
     } else {
-        orphanage = "Helping Hands Orphanage - Nearby";
+      locationSection.style.display = 'none';
+      document.getElementById('confirmBtn').style.display = 'none';
+    }
+  }
+
+  function suggestOrphanage(lat, lon) {
+    let orphanage = "";
+    // Dummy logic: you can plug in real mapping later
+    if (lat > 17 && lon > 78) {
+      orphanage = "Hope Orphanage - Hyderabad";
+    } else {
+      orphanage = "Helping Hands Orphanage - Nearby";
     }
 
     document.getElementById('orphanage').value = orphanage;
-    document.getElementById('confirmBtn').style.display = 'block';
-}
+  }
 
-function submitForm() {
+  function submitForm() {
     const otp = document.getElementById('otp').value;
-    if (otp.length != 4) {
-        alert('Enter Valid OTP');
-        return;
+    if (otp.length != 6) {
+      alert('Enter Valid Code');
+      return;
     }
 
     fetch(`https://2factor.in/API/V1/2a0e1aa8-15fa-11f0-8b17-0200cd936042/SMS/VERIFY/${sessionId}/${otp}`)
-    .then(response => response.json())
-    .then(data => {
+      .then(response => response.json())
+      .then(data => {
         if (data.Status == "Success") {
-            document.getElementById('donorForm').style.display = 'none';
-            document.getElementById('formTitle').style.display = 'none';
-            document.getElementById('message').style.display = 'block';
-            document.getElementById('message').innerHTML = `
-                <h3>🎉 Registration & Donation Successful! 🎉</h3>
-                <p>Thank you for your valuable contribution!</p>
-            `;
+          document.getElementById('donorForm').style.display = 'none';
+          document.getElementById('formTitle').style.display = 'none';
+          document.getElementById('message').style.display = 'block';
+          document.getElementById('message').innerHTML = `
+            <h3>🎉 Registration & Donation Successful! 🎉</h3>
+            <p>Thank you for your valuable contribution!</p>
+          `;
         } else {
-            alert('Incorrect OTP');
+          alert('Incorrect Code');
         }
-    });
-}
+      });
+  }
 </script>
-
 </body>
 </html>
 
