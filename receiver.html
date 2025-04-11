@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+orphanages.html reg <!DOCTYPE html>
 <html>
 <head>
     <title>Orphanage Registration Form</title>
@@ -13,7 +13,10 @@
             margin: 0;
             flex-direction: column;
         }
-        h1 { color: #4CAF50; text-align: center; }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
         form {
             background: #fff;
             padding: 20px;
@@ -36,7 +39,9 @@
             cursor: pointer;
             width: 100%;
         }
-        button:hover { background: #45a049; }
+        button:hover {
+            background: #45a049;
+        }
         #successMessage {
             display: none;
             color: #4CAF50;
@@ -77,54 +82,18 @@
     </style>
 </head>
 <body>
-     <header style="background-color: #ffffff; padding: 10px 0; width: 100%; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
-  <div class="logo" style="color: #333; font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 10px;">
-    Food <b style="color: green;">Donate</b>
-  </div>
 
-  <nav style="display: flex; justify-content: center; gap: 10px; align-items: center;">
-    <a href="index.html" style="text-decoration: none;">
-      <button style="color: #333; padding: 5px 8px; border: 1px solid #069fc1; cursor: pointer; background: #fff; border-radius: 7px;">Home</button>
-    </a>
-    <a href="about.html" style="text-decoration: none;">
-      <button style="color: #333; padding: 5px 8px; border: 1px solid #069fc1; cursor: pointer; background: #fff; border-radius: 7px;">About</button>
-    </a>
-    <a href="receiver.html" style="text-decoration: none;">
-      <button style="color: #333; padding: 5px 8px; border: 1px solid #069fc1; cursor: pointer; background: #fff; border-radius: 7px;">Orphanage Form</button>
-    </a>
-    <a href="donor.html" style="text-decoration: none;">
-      <button style="color: #333; padding: 5px 8px; border: 1px solid #069fc1; cursor: pointer; background: #fff; border-radius: 7px;">Donor Form</button>
-    </a>
-    <a href="notifications.html" style="text-decoration: none;">
-      <button style="padding: 5px 8px; border: 1px solid #069fc1; cursor: pointer; background: #fff; border-radius: 7px;">🔔</button>
-    </a>
-    <a href="feedback.html" style="text-decoration: none;">
-      <button style="color: #333; padding: 5px 8px; border: 1px solid #069fc1; cursor: pointer; background: #fff; border-radius: 7px;">Feedback</button>
-    </a>
-  </nav>
-</header><br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     <form id="orphanageForm">
         <h1>Orphanage Registration</h1>
+
         <label for="name">Orphanage Name:</label>
         <input type="text" id="name" required>
 
+        <label for="people">Number of People:</label>
+        <input type="number" id="people" required>
+
         <label for="location">Location:</label>
-        <input type="text" id="location" required>
+        <input type="text" id="location" readonly required>
 
         <label for="phone">Phone Number:</label>
         <input type="tel" id="phone" required>
@@ -132,9 +101,11 @@
         <label for="email">Email:</label>
         <input type="email" id="email" required>
 
+        <input type="hidden" id="latitude">
+        <input type="hidden" id="longitude">
+
         <button type="submit">Register</button>
         <div id="successMessage">✅ Registration Successful!</div>
-        
     </form>
 
     <div id="registeredOrphanages">
@@ -143,20 +114,7 @@
     </div>
 
     <script>
-        const orphanages = [
-            { name: "Hope Children's Home", location: "13.6288,79.4192", place: "Tirupati Central", phone: "+91 98765 43210", email: "hope@orph.com" },
-            { name: "Bright Future Orphanage", location: "13.6205,79.4414", place: "Tiruchanoor", phone: "+91 98765 43211", email: "brightfuture@orph.com" },
-            { name: "Safe Haven Kids Home", location: "13.6536,79.5129", place: "Renigunta", phone: "+91 98765 43212", email: "safehaven@orph.com" },
-            { name: "Little Stars Orphanage", location: "13.5777,79.2939", place: "Chandragiri", phone: "+91 98765 43213", email: "littlestars@orph.com" },
-            { name: "New Beginnings Home", location: "13.6517,79.4216", place: "Alipiri", phone: "+91 98765 43214", email: "newbeginnings@orph.com" },
-            { name: "Sunshine Children's Shelter", location: "13.6308,79.4377", place: "SV Zoo", phone: "+91 98765 43215", email: "sunshine@orph.com" },
-            { name: "Faithful Hearts Orphanage", location: "13.6315,79.4159", place: "Kapilatheertham", phone: "+91 98765 43216", email: "faithfulhearts@orph.com" },
-            { name: "Bright Horizons Home", location: "13.6464,79.4248", place: "Peruru", phone: "+91 98765 43217", email: "brighthorizons@orph.com" },
-            { name: "Caring Hands Shelter", location: "13.6354,79.4279", place: "RC Road", phone: "+91 98765 43218", email: "caringhands@orph.com" },
-            { name: "Children's Joy Home", location: "13.6369,79.4241", place: "Leela Mahal Circle", phone: "+91 98765 43219", email: "joyhome@orph.com" },
-            { name: "Happy Hearts Shelter", location: "13.6330,79.4260", place: "Bairagi Patteda", phone: "+91 98765 43220", email: "happyhearts@orph.com" }
-        ];
-    
+        const orphanages = [];
 
         const orphanageList = document.getElementById('orphanageList');
         const registeredSection = document.getElementById('registeredOrphanages');
@@ -165,7 +123,14 @@
             orphanageList.innerHTML = '';
             orphanages.forEach(orphanage => {
                 const listItem = document.createElement('li');
-                listItem.innerHTML = `<strong>${orphanage.name}</strong><br>📍 ${orphanage.place}<br>📞 ${orphanage.phone}<br>📧 ${orphanage.email}`;
+                listItem.innerHTML = `
+                    <strong>${orphanage.name}</strong>
+                    👥 People: ${orphanage.people}
+                    📍 Location: ${orphanage.place}
+                    📞 ${orphanage.phone}
+                    📧 ${orphanage.email}
+                    🌍 Lat: ${orphanage.latitude}, Lng: ${orphanage.longitude}
+                `;
                 orphanageList.appendChild(listItem);
             });
             registeredSection.style.display = 'block';
@@ -176,9 +141,12 @@
 
             const newOrphanage = {
                 name: document.getElementById('name').value,
+                people: document.getElementById('people').value,
                 place: document.getElementById('location').value,
                 phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value
+                email: document.getElementById('email').value,
+                latitude: document.getElementById('latitude').value,
+                longitude: document.getElementById('longitude').value
             };
 
             orphanages.push(newOrphanage);
@@ -191,77 +159,53 @@
                 document.getElementById('orphanageForm').style.display = 'none';
             }, 2000);
         });
-        document.getElementById('orphanageForm').addEventListener('submit', function (event) {
-    event.preventDefault();
 
-    const newOrphanage = {
-        name: document.getElementById('name').value,
-        place: document.getElementById('location').value,
-        phone: document.getElementById('phone').value,
-        email: document.getElementById('email').value
-    };
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
 
-    orphanages.push(newOrphanage);
-    displayOrphanages();
+        function showPosition(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
 
-    document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lon;
 
-    setTimeout(() => {
-        document.getElementById('successMessage').style.display = 'none';
-        document.getElementById('orphanageForm').reset();
-        document.getElementById('orphanageForm').style.display = 'none';
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+                .then(response => response.json())
+                .then(data => {
+                    const address = data.address;
+                    const fullAddress = `${address.house_number || ''} ${address.road || ''}, ${address.suburb || ''}, ${address.city || address.town || address.village || ''}, ${address.state || ''}, ${address.postcode || ''}, ${address.country || ''}`;
+                    document.getElementById('location').value = fullAddress.trim().replace(/\s+/g, ' ');
+                })
+                .catch(() => {
+                    document.getElementById('location').value = `${lat}, ${lon}`;
+                });
+        }
 
-        // Hide header and footer
-        document.querySelector('header').style.display = 'none';
-        document.querySelector('footer').style.display = 'none';
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
 
-        // Show "Go Back" button
-        const goBackBtn = document.createElement('button');
-        goBackBtn.innerText = 'Go Back';
-        goBackBtn.style.cssText = 'margin-top: 15px; padding: 10px; background: #4CAF50; color: white; border: none; cursor: pointer; border-radius: 5px;';
-        goBackBtn.addEventListener('click', () => {
-            // Restore header, footer, and form
-            document.querySelector('header').style.display = 'block';
-            document.querySelector('footer').style.display = 'block';
-            document.getElementById('orphanageForm').style.display = 'block';
-            registeredSection.style.display = 'none'; // Hide orphanage list again
-            goBackBtn.remove(); // Remove button after clicking
-        });
-
-        registeredSection.appendChild(goBackBtn);
-    }, 2000);
-});
-
-
-
+        window.onload = getLocation;
     </script>
-     <footer style="background-color: #000000; color: #fff; padding: 20px 0; width:100%">
-    <div style="max-width: 100%; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between;">
-      <!-- About Us -->
-      <div style="flex: 1 1 250px; margin: 10px;">
-        <h3>About Us</h3>
-        <p>
-          We are dedicated to delivering top-notch services and creating value for our customers. 
-          Learn more about our mission and values.
-        </p>
-      </div>
-      <!-- Contact Information -->
-      <div style="flex: 1 1 250px; margin: 10px;">
-        <h3>Contact Us</h3>
-        <p>SPMVV ,Tirupati</p>
-        <p>Email:kapulurubhuvaneeswarivspdbct@gmail.com</p>
-        <p>Email: sravani30j@gmail.com</p>
-      </div>
-      <div style="flex: 1 1 250px; margin:10px;">
-          <h3>Follow Us on Linkedin</h3>
-          <p><a href="https://www.linkedin.com/in/akhila-kurimella-652470311?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Akhila</a></p>
-          <p><a href="https://www.linkedin.com/in/hemalatha-malapati-b0591030a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Hemalatha</a></p>
-     </div>
-    </div>
-  <!-- Footer Bottom -->
-  <div style="text-align: center; margin-top: 20px; font-size: 14px; color: #ccc;">
-    &copy; 2024 YourCompanyName. All rights reserved.
-  </div>
-</footer>
+
 </body>
 </html>
