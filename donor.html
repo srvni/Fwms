@@ -68,7 +68,7 @@
 
       <button type="button" onclick="sendOTP()">Send OTP</button>
 
-      <label>Enter OTP:</label>
+      <label>Enter Code:</label>
       <input type="text" id="otp" required />
 
       <label>Current Date & Time:</label>
@@ -119,10 +119,7 @@
       }
     };
 
-    function redirectToTerms() {
-      window.location.href = "terms.html";
-    }
-
+  
     function sendOTP() {
       const phone = document.getElementById("phone").value;
       if (phone.length != 10) {
@@ -182,7 +179,7 @@
 
     function submitForm() {
       const otp = document.getElementById("otp").value;
-      if (otp.length != 4) {
+      if (otp.length != 6) {
         alert("Enter Valid OTP");
         return;
       }
