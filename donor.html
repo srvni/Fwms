@@ -130,9 +130,9 @@
         .then((data) => {
           if (data.Status == "Success") {
             sessionId = data.Details;
-            alert("OTP Sent Successfully");
+            alert("CODE Sent Successfully");
           } else {
-            alert("Error Sending OTP");
+            alert("Error Sending CODE");
           }
         });
     }
@@ -204,7 +204,7 @@
     function submitForm() {
       const otp = document.getElementById("otp").value;
       if (otp.length != 6) {
-        alert("Enter Valid OTP");
+        alert("Enter Valid CODE");
         return;
       }
 
