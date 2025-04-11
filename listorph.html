@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registered Orphanages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        #orphanageList {
+            background: #fff;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .orphanage {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+        .orphanage:last-child {
+            border-bottom: none;
+        }
+        .orphanage strong {
+            color: #4CAF50;
+        }
+        button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Registered Orphanages</h1>
+    <div id="orphanageList">
+        <!-- Orphanage entries will be loaded here -->
+    </div>
+
+    <button onclick="goToHome()">Go to Home Page</button>
+
+    <script>
+        function loadOrphanages() {
+            const listContainer = document.getElementById('orphanageList');
+            const orphanages = JSON.parse(localStorage.getItem('orphanages')) || [];
+
+            if (orphanages.length === 0) {
+                listContainer.innerHTML = '<p>No orphanages registered yet.</p>';
+                return;
+            }
+
+            orphanages.forEach(orphanage => {
+                const div = document.createElement('div');
+                div.className = 'orphanage';
+                div.innerHTML = `
+                    <strong>${orphanage.name}</strong><br>
+                    👥 People: ${orphanage.people}<br>
+                    📍 Location: ${orphanage.place}<br>
+                    📞 Phone: ${orphanage.phone}<br>
+                    📧 Email: ${orphanage.email}<br>
+                    
+                `;
+                listContainer.appendChild(div);
+            });
+        }
+
+        function goToHome() {
+            localStorage.setItem('homeRedirectMessage', 'Welcome back to the Home Page!');
+            window.location.href = 'index.html';
+        }
+
+        window.onload = loadOrphanages;
+    </script>
+
+</body>
+</html>
