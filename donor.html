@@ -40,13 +40,12 @@
       background: #45a049;
     }
     .terms {
-  margin-top: 10px;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
+      margin-top: 10px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
     #message {
       display: none;
       text-align: center;
@@ -119,7 +118,6 @@
       }
     };
 
-  
     function sendOTP() {
       const phone = document.getElementById("phone").value;
       if (phone.length != 10) {
@@ -140,26 +138,52 @@
     }
 
     function validateDateTime() {
-  const current = new Date(); // Current datetime
-  const eventInput = document.getElementById("eventDateTime").value;
+      const current = new Date();
+      const eventInput = document.getElementById("eventDateTime").value;
+      if (!eventInput) return;
 
-  if (!eventInput) return;
+      const eventDateTime = new Date(eventInput);
+      const diffMs = current - eventDateTime;
+      const diffHours = diffMs / (1000 * 60 * 60);
 
-  const eventDateTime = new Date(eventInput);
+      if (diffHours > 0 && diffHours <= 8) {
+        console.log("✅ Eligible: Event is in the past and within 8 hours.");
+      } else {
+        alert("⛔ You are not eligible to donate. The event should be in the past and within the last 8 hours.");
+        window.location.href = "index.html";
+      }
+    }
 
-  const diffMs = current - eventDateTime; // event should be in the past
-  const diffHours = diffMs / (1000 * 60 * 60); // difference in hours
+    function redirectToTerms() {
+      const termsCheckbox = document.getElementById("terms");
 
-  if (diffHours > 0 && diffHours <= 8) {
-    console.log("✅ Eligible: Event is in the past and within 8 hours.");
-    // Proceed with form
-  } else {
-    alert("⛔ You are not eligible to donate. The event should be in the past and within the last 8 hours.");
-    window.location.href = "index.html";
-  }
-}
+      if (termsCheckbox.checked) {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const latitude = position.coords.latitude;
+              const longitude = position.coords.longitude;
 
+              console.log("Latitude:", latitude);
+              console.log("Longitude:", longitude);
 
+              document.getElementById("location").value = `Lat: ${latitude}, Lon: ${longitude}`;
+              document.getElementById("locationSection").style.display = "block";
+              suggestOrphanage();
+            },
+            (error) => {
+              alert("Location access denied or unavailable.");
+              termsCheckbox.checked = false;
+            }
+          );
+        } else {
+          alert("Geolocation is not supported by this browser.");
+          termsCheckbox.checked = false;
+        }
+      } else {
+        document.getElementById("locationSection").style.display = "none";
+      }
+    }
 
     function suggestOrphanage() {
       const location = document.getElementById("location").value.toLowerCase();
@@ -203,5 +227,6 @@
   </script>
 </body>
 </html>
+
 
 
