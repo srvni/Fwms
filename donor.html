@@ -124,7 +124,7 @@ function sendOTP() {
         return;
     }
 
-    fetch(`https://2factor.in/API/V1/YOUR_API_KEY/SMS/${phone}/AUTOGEN`)
+    fetch(`https://2factor.in/API/V1/2a0e1aa8-15fa-11f0-8b17-0200cd936042/SMS/${phone}/AUTOGEN`)
     .then(response => response.json())
     .then(data => {
         if(data.Status == "Success"){
@@ -170,7 +170,7 @@ function submitForm() {
         return;
     }
 
-    fetch(`https://2factor.in/API/V1/YOUR_API_KEY/SMS/VERIFY/${sessionId}/${otp}`)
+    fetch(`https://2factor.in/API/V1/2a0e1aa8-15fa-11f0-8b17-0200cd936042/SMS/VERIFY/${sessionId}/${otp}`)
     .then(response => response.json())
     .then(data => {
         if (data.Status == "Success") {
