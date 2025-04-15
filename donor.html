@@ -19,6 +19,8 @@
       border-radius: 10px;
       width: 400px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow-y: auto;
+      max-height: 95vh;
     }
     h2 {
       text-align: center;
@@ -48,183 +50,215 @@
     }
     #message {
       display: none;
-      text-align: center;
       margin-top: 20px;
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <h2 id="formTitle">Donor Registration Form</h2>
 
-    <form id="donorForm">
-      <label>Name:</label>
-      <input type="text" id="name" required />
+<div class="container">
+  <h2 id="formTitle">Donor Registration Form</h2>
 
-      <label>Phone Number:</label>
-      <input type="text" id="phone" required />
+  <form id="donorForm">
+    <label>Name:</label>
+    <input type="text" id="name" required />
 
-      <button type="button" onclick="sendOTP()">Send Code</button>
+    <label>Phone Number:</label>
+    <input type="text" id="phone" required />
 
-      <label>Enter Code:</label>
-      <input type="text" id="otp" required />
+    <button type="button" onclick="sendOTP()">Send Code</button>
 
-      <label>Current Date & Time:</label>
-      <input type="text" id="currentTime" readonly />
+    <label>Enter Code:</label>
+    <input type="text" id="otp" required />
 
-      <label>Event Date & Time:</label>
-      <input type="datetime-local" id="eventDateTime" required onchange="validateDateTime()" />
+    <label>Current Date & Time:</label>
+    <input type="text" id="currentTime" readonly />
 
-      <label>Reason for Donation:</label>
-      <select id="reason" required>
-        <option value="">Select</option>
-        <option value="Fresh Food">Fresh Food</option>
-        <option value="Leftover Food">Leftover Food</option>
-      </select>
+    <label>Event Date & Time:</label>
+    <input type="datetime-local" id="eventDateTime" required onchange="validateDateTime()" />
 
-      <label>Food Details:</label>
-      <input type="text" id="foodDetails" required />
+    <label>Reason for Donation:</label>
+    <select id="reason" required>
+      <option value="">Select</option>
+      <option value="Fresh Food">Fresh Food</option>
+      <option value="Leftover Food">Leftover Food</option>
+    </select>
 
-      <div class="terms">
-        <input type="checkbox" id="terms" onclick="redirectToTerms()" />
-        I will be the one who face consequences if food is spoiled
-      </div>
+    <label>Food Details:</label>
+    <input type="text" id="foodDetails" required />
 
-      <div id="locationSection" style="display: none;">
-        <label>Enter Your Location:</label>
-        <input type="text" id="location" required oninput="suggestOrphanage()" />
+    <label for="location">Location:</label>
+    <select id="location" required>
+        <option value="">-- Select Location --</option>
+        <optgroup label="Tirupati">
+            <option value="Tirupati" data-lat="13.6288" data-lng="79.4192">Tirupati (Main)</option>
+            <optgroup label="Tirumala Hills">
+                <option value="Tirumala Hills - Vaikuntam Queue Complex" data-lat="13.6879" data-lng="79.3475">Vaikuntam Queue Complex</option>
+                <option value="Tirumala Hills - Temple surroundings" data-lat="13.6833" data-lng="79.3472">Temple surroundings</option>
+                <option value="Tirumala Hills - Papavinasam" data-lat="13.6842" data-lng="79.3387">Papavinasam</option>
+            </optgroup>
+            <optgroup label="Renigunta">
+                <option value="Renigunta - Railway Station Area" data-lat="13.6368" data-lng="79.5187">Railway Station Area</option>
+                <option value="Renigunta - RTC Colony" data-lat="13.6375" data-lng="79.5143">RTC Colony</option>
+                <option value="Renigunta - Airport Road" data-lat="13.6511" data-lng="79.5432">Airport Road</option>
+            </optgroup>
+            <optgroup label="Tiruchanoor">
+                <option value="Tiruchanoor - Padmavathi Temple Road" data-lat="13.6092" data-lng="79.4423">Padmavathi Temple Road</option>
+                <option value="Tiruchanoor - Residential Area" data-lat="13.6115" data-lng="79.4456">Residential Area</option>
+            </optgroup>
+            <optgroup label="Kapilateertham">
+                <option value="Kapilateertham - Temple surroundings" data-lat="13.6159" data-lng="79.4144">Temple surroundings</option>
+                <option value="Kapilateertham - Market Road" data-lat="13.6168" data-lng="79.4169">Market Road</option>
+            </optgroup>
+            <optgroup label="Chandragiri">
+                <option value="Chandragiri - Fort Area" data-lat="13.5744" data-lng="79.3189">Fort Area</option>
+                <option value="Chandragiri - Bypass Road" data-lat="13.5731" data-lng="79.3248">Bypass Road</option>
+            </optgroup>
+            <optgroup label="Settipalli">
+                <option value="Settipalli - Main Road" data-lat="13.6012" data-lng="79.4321">Main Road</option>
+                <option value="Settipalli - Residential Zone" data-lat="13.6033" data-lng="79.4348">Residential Zone</option>
+            </optgroup>
+            <optgroup label="MR Palli">
+                <option value="MR Palli - Police Station Road" data-lat="13.6123" data-lng="79.4281">Police Station Road</option>
+                <option value="MR Palli - Housing Colony" data-lat="13.6107" data-lng="79.4296">Housing Colony</option>
+            </optgroup>
+            <optgroup label="RC Road">
+                <option value="RC Road - Hospitals" data-lat="13.6149" data-lng="79.4339">Hospitals</option>
+                <option value="RC Road - Shopping Area" data-lat="13.6155" data-lng="79.4352">Shopping Area</option>
+            </optgroup>
+            <optgroup label="Leelamahal">
+                <option value="Leelamahal - Signal Point" data-lat="13.6253" data-lng="79.4205">Signal Point</option>
+                <option value="Leelamahal - Bypass Junction" data-lat="13.6267" data-lng="79.4211">Bypass Junction</option>
+            </optgroup>
+        </optgroup>
+    </select>
 
-        <label>Nearby Orphanage:</label>
-        <input type="text" id="orphanage" readonly />
-      </div>
+    <div class="terms">
+      <input type="checkbox" id="terms" onclick="toggleLocation()" />
+      I will be the one who faces consequences if food is spoiled
+    </div>
 
-      <button type="button" id="confirmBtn" style="display: none;" onclick="submitForm()">Confirm & Register</button>
-    </form>
+    <button type="button" id="confirmBtn" style="display: none;" onclick="submitForm()">Confirm & Register</button>
+  </form>
 
-    <div id="message"></div>
-  </div>
+  <div id="message"></div>
+</div>
 
-  <script>
-    let sessionId = "";
+<script>
+  let sessionId = "";
 
-    window.onload = function () {
-      const now = new Date();
-      document.getElementById("currentTime").value = now.toLocaleString();
+  window.onload = function () {
+    const now = new Date();
+    document.getElementById("currentTime").value = now.toLocaleString();
+  };
 
-      const params = new URLSearchParams(window.location.search);
-      if (params.get("agreed") === "true") {
-        document.getElementById("locationSection").style.display = "block";
-      }
-    };
-
-    function sendOTP() {
-      const phone = document.getElementById("phone").value;
-      if (phone.length != 10) {
-        alert("Enter Valid 10-digit Mobile Number");
-        return;
-      }
-
-      fetch(`https://2factor.in/API/V1/2a0e1aa8-15fa-11f0-8b17-0200cd936042/SMS/${phone}/AUTOGEN`)
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.Status == "Success") {
-            sessionId = data.Details;
-            alert("CODE Sent Successfully");
-          } else {
-            alert("Error Sending CODE");
-          }
-        });
+  function sendOTP() {
+    const phone = document.getElementById("phone").value;
+    if (phone.length !== 10) {
+      alert("Enter a valid 10-digit mobile number.");
+      return;
     }
 
-    function validateDateTime() {
-      const current = new Date();
-      const eventInput = document.getElementById("eventDateTime").value;
-      if (!eventInput) return;
-
-      const eventDateTime = new Date(eventInput);
-      const diffMs = current - eventDateTime;
-      const diffHours = diffMs / (1000 * 60 * 60);
-
-      if (diffHours > 0 && diffHours <= 8) {
-        console.log("✅ Eligible: Event is in the past and within 8 hours.");
-      } else {
-        alert("⛔ You are not eligible to donate. The event should be in the past and within the last 8 hours.");
-        window.location.href = "index.html";
-      }
-    }
-
-    function redirectToTerms() {
-      const termsCheckbox = document.getElementById("terms");
-
-      if (termsCheckbox.checked) {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const latitude = position.coords.latitude;
-              const longitude = position.coords.longitude;
-
-              console.log("Latitude:", latitude);
-              console.log("Longitude:", longitude);
-
-              document.getElementById("location").value = `Lat: ${latitude}, Lon: ${longitude}`;
-              document.getElementById("locationSection").style.display = "block";
-              suggestOrphanage();
-            },
-            (error) => {
-              alert("Location access denied or unavailable.");
-              termsCheckbox.checked = false;
-            }
-          );
+    fetch(`https://2factor.in/API/V1/2a0e1aa8-15fa-11f0-8b17-0200cd936042/SMS/${phone}/AUTOGEN`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.Status === "Success") {
+          sessionId = data.Details;
+          alert("Code sent successfully.");
         } else {
-          alert("Geolocation is not supported by this browser.");
-          termsCheckbox.checked = false;
+          alert("Error sending code.");
         }
-      } else {
-        document.getElementById("locationSection").style.display = "none";
-      }
+      });
+  }
+
+  function validateDateTime() {
+    const current = new Date();
+    const eventInput = document.getElementById("eventDateTime").value;
+    if (!eventInput) return;
+
+    const eventDateTime = new Date(eventInput);
+    const diffMs = current - eventDateTime;
+    const diffHours = diffMs / (1000 * 60 * 60);
+
+    if (diffHours > 0 && diffHours <= 8) {
+      console.log("✅ Eligible: Event is in the past and within 8 hours.");
+    } else {
+      alert("⛔ Not eligible to donate. Event must be within the past 8 hours.");
+      window.location.href = "index.html";
+    }
+  }
+
+  function toggleLocation() {
+    const checkbox = document.getElementById("terms");
+    const confirmBtn = document.getElementById("confirmBtn");
+    confirmBtn.style.display = checkbox.checked ? "block" : "none";
+  }
+
+  function submitForm() {
+    const otp = document.getElementById("otp").value;
+    if (otp.length !== 6) {
+      alert("Enter a valid 6-digit code.");
+      return;
     }
 
-    function suggestOrphanage() {
-      const location = document.getElementById("location").value.toLowerCase();
-      let orphanage = "";
+    fetch(`https://2factor.in/API/V1/2a0e1aa8-15fa-11f0-8b17-0200cd936042/SMS/VERIFY/${sessionId}/${otp}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.Status === "Success") {
+          const select = document.getElementById("location");
+          const selectedOption = select.options[select.selectedIndex];
+          const userLat = parseFloat(selectedOption.getAttribute("data-lat"));
+          const userLng = parseFloat(selectedOption.getAttribute("data-lng"));
 
-      if (location.includes("hyderabad")) {
-        orphanage = "Hope Orphanage - Hyderabad";
-      } else if (location.includes("secunderabad")) {
-        orphanage = "Care Home - Secunderabad";
-      } else {
-        orphanage = "Helping Hands Orphanage - Nearby";
-      }
+          showNearestOrphanages(userLat, userLng);
+        } else {
+          alert("Incorrect code.");
+        }
+      });
+  }
 
-      document.getElementById("orphanage").value = orphanage;
-      document.getElementById("confirmBtn").style.display = "block";
+  function getDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * Math.PI / 180) *
+      Math.cos(lat2 * Math.PI / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
+
+  function showNearestOrphanages(lat, lng) {
+    const orphanages = JSON.parse(localStorage.getItem('orphanages')) || [];
+    if (!orphanages.length) {
+      alert("No orphanages registered yet.");
+      return;
     }
 
-    function submitForm() {
-      const otp = document.getElementById("otp").value;
-      if (otp.length != 6) {
-        alert("Enter Valid CODE");
-        return;
-      }
+    const nearest = orphanages
+      .map(o => ({
+        ...o,
+        distance: getDistance(lat, lng, o.latitude, o.longitude)
+      }))
+      .sort((a, b) => a.distance - b.distance)
+      .slice(0, 3);
 
-      fetch(`https://2factor.in/API/V1/2a0e1aa8-15fa-11f0-8b17-0200cd936042/SMS/VERIFY/${sessionId}/${otp}`)
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.Status == "Success") {
-            document.getElementById("donorForm").style.display = "none";
-            document.getElementById("formTitle").style.display = "none";
-            document.getElementById("message").style.display = "block";
-            document.getElementById("message").innerHTML = `
-              <h3>🎉 Registration & Donation Successful! 🎉</h3>
-              <p>Thank you for your valuable contribution!</p>
-            `;
-          } else {
-            alert("Incorrect CODE");
-          }
-        });
-    }
-  </script>
+    const messageDiv = document.getElementById("message");
+    messageDiv.innerHTML = "<h3>Nearest Orphanages:</h3>" + nearest.map(o => `
+      <div class="card">
+        <h4>${o.name}</h4>
+        📍 ${o.place}<br>
+        📞 ${o.phone}<br>
+        📧 ${o.email}<br>
+      </div>
+    `).join("");
+    messageDiv.style.display = "block";
+  }
+</script>
+
 </body>
 </html>
 
