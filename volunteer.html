@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Volunteer Registration</title>
+  <style>
+    body {
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow-y: auto;
+      max-height: 95vh;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 15px;
+      background: #4CAF50; /* Green color */
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    #message {
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Volunteer Registration</h2>
+
+  <form id="volunteerForm">
+    <label>Name:</label>
+    <input type="text" id="volunteerName" required />
+
+    <label>Phone Number:</label>
+    <input type="text" id="volunteerPhone" required />
+
+    <button type="button" onclick="sendVolunteerOTP()">Send Code</button>
+
+    <label>Enter Code:</label>
+    <input type="text" id="volunteerOtp" required />
+
+    <label>Availability Time:</label>
+    <input type="text" id="availability" placeholder="e.g., 10 AM - 6 PM" required />
+
+    <label for="volunteerLocation">Preferred Location:</label>
+    <select id="volunteerLocation" required>
+        <option value="">-- Select Location --</option>
+        <optgroup label="Tirupati">
+            <option value="Tirupati" data-lat="13.6288" data-lng="79.4192">Tirupati (Main)</option>
+            <optgroup label="Tirumala Hills">
+                <option value="Tirumala Hills - Vaikuntam Queue Complex" data-lat="13.6879" data-lng="79.3475">Vaikuntam Queue Complex</option>
+                <option value="Tirumala Hills - Temple surroundings" data-lat="13.6833" data-lng="79.3472">Temple surroundings</option>
+                <option value="Tirumala Hills - Papavinasam" data-lat="13.6842" data-lng="79.3387">Papavinasam</option>
+            </optgroup>
+            <optgroup label="Renigunta">
+                <option value="Renigunta - Railway Station Area" data-lat="13.6368" data-lng="79.5187">Railway Station Area</option>
+                <option value="Renigunta - RTC Colony" data-lat="13.6375" data-lng="79.5143">RTC Colony</option>
+                <option value="Renigunta - Airport Road" data-lat="13.6511" data-lng="79.5432">Airport Road</option>
+            </optgroup>
+            <optgroup label="Tiruchanoor">
+                <option value="Tiruchanoor - Padmavathi Temple Road" data-lat="13.6092" data-lng="79.4423">Padmavathi Temple Road</option>
+                <option value="Tiruchanoor - Residential Area" data-lat="13.6115" data-lng="79.4456">Residential Area</option>
+            </optgroup>
+            <optgroup label="Kapilateertham">
+                <option value="Kapilateertham - Temple surroundings" data-lat="13.6159" data-lng="79.4144">Temple surroundings</option>
+                <option value="Kapilateertham - Market Road" data-lat="13.6168" data-lng="79.4169">Market Road</option>
+            </optgroup>
+            <optgroup label="Chandragiri">
+                <option value="Chandragiri - Fort Area" data-lat="13.5744" data-lng="79.3189">Fort Area</option>
+                <option value="Chandragiri - Bypass Road" data-lat="13.5731" data-lng="79.3248">Bypass Road</option>
+            </optgroup>
+            <optgroup label="Settipalli">
+                <option value="Settipalli - Main Road" data-lat="13.6012" data-lng="79.4321">Main Road</option>
+                <option value="Settipalli - Residential Zone" data-lat="13.6033" data-lng="79.4348">Residential Zone</option>
+            </optgroup>
+            <optgroup label="MR Palli">
+                <option value="MR Palli - Police Station Road" data-lat="13.6123" data-lng="79.4281">Police Station Road</option>
+                <option value="MR Palli - Housing Colony" data-lat="13.6107" data-lng="79.4296">Housing Colony</option>
+            </optgroup>
+            <optgroup label="RC Road">
+                <option value="RC Road - Hospitals" data-lat="13.6149" data-lng="79.4339">Hospitals</option>
+                <option value="RC Road - Shopping Area" data-lat="13.6155" data-lng="79.4352">Shopping Area</option>
+            </optgroup>
+            <optgroup label="Leelamahal">
+                <option value="Leelamahal - Signal Point" data-lat="13.6253" data-lng="79.4205">Signal Point</option>
+                <option value="Leelamahal - Bypass Junction" data-lat="13.6267" data-lng="79.4211">Bypass Junction</option>
+            </optgroup>
+        </optgroup>
+    </select>
+
+    <button type="button" onclick="registerVolunteer()">Register</button>
+  </form>
+
+  <div id="message"></div>
+</div>
+
+<script>
+  let volunteerSessionId = "";
+
+  function sendVolunteerOTP() {
+    const phone = document.getElementById("volunteerPhone").value;
+    if (phone.length !== 10) {
+      alert("Enter a valid 10-digit mobile number.");
+      return;
+    }
+
+    fetch(`https://2factor.in/API/V1/2a0e1aa8-15fa-11f0-8b17-0200cd936042/SMS/${phone}/AUTOGEN`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.Status === "Success") {
+          volunteerSessionId = data.Details;
+          alert("Code sent successfully.");
+        } else {
+          alert("Error sending code.");
+        }
+      });
+  }
+
+  function registerVolunteer() {
+    const otp = document.getElementById("volunteerOtp").value;
+    if (otp.length !== 6) {
+      alert("Enter a valid 6-digit code.");
+      return;
+    }
+
+    fetch(`https://2factor.in/API/V1/2a0e1aa8-15fa-11f0-8b17-0200cd936042/SMS/VERIFY/${volunteerSessionId}/${otp}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.Status === "Success") {
+          const name = document.getElementById("volunteerName").value;
+          const phone = document.getElementById("volunteerPhone").value;
+          const availability = document.getElementById("availability").value;
+          const select = document.getElementById("volunteerLocation");
+          const selectedOption = select.options[select.selectedIndex];
+          const location = selectedOption.value;
+          const lat = parseFloat(selectedOption.getAttribute("data-lat"));
+          const lng = parseFloat(selectedOption.getAttribute("data-lng"));
+
+          const volunteer = {
+            name,
+            phone,
+            availability,
+            location,
+            latitude: lat,
+            longitude: lng
+          };
+
+          let volunteers = JSON.parse(localStorage.getItem('volunteers')) || [];
+          volunteers.push(volunteer);
+          localStorage.setItem('volunteers', JSON.stringify(volunteers));
+
+          document.getElementById("message").innerHTML = "<h3>🎉 Registration Successful!</h3>";
+          document.getElementById("message").style.display = "block";
+
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 1000);
+        } else {
+          alert("Incorrect code.");
+        }
+      });
+  }
+</script>
+
+</body>
+</html>
