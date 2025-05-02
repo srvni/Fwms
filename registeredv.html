@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registered Volunteers</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f1f1;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .card h3 {
+      margin-top: 0;
+      color: #4CAF50;
+    }
+    .card p {
+      margin: 8px 0;
+      line-height: 1.5;
+    }
+    .no-volunteers {
+      text-align: center;
+      font-size: 1.2em;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Registered Volunteers</h1>
+
+<div id="volunteersContainer" class="cards-container"></div>
+
+<script>
+  const container = document.getElementById("volunteersContainer");
+  const volunteers = JSON.parse(localStorage.getItem("volunteers")) || [];
+
+  if (volunteers.length === 0) {
+    container.innerHTML = '<div class="no-volunteers">No volunteers registered yet.</div>';
+  } else {
+    volunteers.forEach(volunteer => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h3>${volunteer.name}</h3>
+        <p><strong>Phone:</strong> ${volunteer.phone}</p>
+        <p><strong>Availability:</strong> ${volunteer.availability}</p>
+        <p><strong>Location:</strong> ${volunteer.location}</p>
+        <p><strong>Latitude:</strong> ${volunteer.latitude}</p>
+        <p><strong>Longitude:</strong> ${volunteer.longitude}</p>
+      `;
+      container.appendChild(card);
+    });
+  }
+</script>
+
+</body>
+</html>
